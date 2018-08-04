@@ -1,0 +1,41 @@
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+body {
+  padding-top: 3.5rem;
+}
+
+
+a{
+  color: #FFFFFF;
+}
+
+a:hover{
+  background-color: #3837372f;
+  color: #FFFFFF;
+}
+
+.header,.footer{
+  background-color:#0677BA;
+ 
+}
+
+.mn-btn:hover{
+  background-color: #3837372f!important;
+}
+
+.mn-drop{
+  background-color: #024F7D;
+}
+
+.dropdown-item:hover{
+  background-color: rgb(3, 56, 87);
+}
+
+.contenedor{
+  background-color: white;
+  box-shadow: 0px 0px 1px 0.8px #cecece;
+  padding: 1.5em 1.5em 1.5em 1.5em;
+}
+
+.titulo-home{
+  margin-bottom: 1.5rem;
+}
