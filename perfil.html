@@ -65,82 +65,101 @@
   </nav>
 
   <main role="main" style="margin-bottom: 3rem;">
-
+    <!--Informacion del usuario-->
     <div class="container mt-4">
-      <!-- Example row of columns -->
-
-      <h3 class="titulo-home">Publicaciones Recientes</h3>
       <div class="row">
-        <div class="col-md-8 contenedor" id="div-publicaciones">
+        <div class="col-md-3 contenedor ">
           <div class="row">
-            <div class="col-md-2 text-center">
-              <i class="fas fa-user fa-2x"></i>
+            <div class="col-12 item-center">
+              <div class="profile-pic">
+                <img class="img-fluid item-center" src="img/usuario.png">
+              </div>
             </div>
-            <div class="col-md-10">
-              <p class="mb-0 font-weight-bold"> Titulo de la publicacion</p>
-              <p class="mb-0">Descripcion</p>
-              <p class="mb-0 small">fecha</p>
+            <div class="col-12 mt-3 item-center">
+              <button type="button" class="btn btn-block btn-outline-primary ">
+                Cambiar foto
+              </button>
+            </div>
+            <div class="col-12 item-center mt-3">
+              <h4 id="h-uname">Nombre del Usuario</h4>
+            </div>
+            <div class="col-12 item-center mt-3">
+              <h5 id="h-name">Nombre de la persona</h5>
+            </div>
+            <div class="col-12 item-center mt-3">
+              <h6 id="h-tusuario">Alumno/Docente</h6>
             </div>
           </div>
-          <hr>
-          <div class="row">
-            <div class="col-md-2 text-center">
-              <i class="fas fa-user fa-2x"></i>
-            </div>
-            <div class="col-md-10">
-              <p class="mb-0 font-weight-bold"> Titulo de la publicacion</p>
-              <p class="mb-0">Descripcion</p>
-              <p class="mb-0 small">fecha</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-md-2 text-center">
-              <i class="fas fa-user fa-2x"></i>
-            </div>
-            <div class="col-md-10">
-              <p class="mb-0 font-weight-bold"> Titulo de la publicacion</p>
-              <p class="mb-0">Descripcion</p>
-              <p class="mb-0 small">fecha</p>
-            </div>
-            <hr>
-          </div>
-
         </div>
 
-        <div class="col-md-4">
-          <h3 class="titulo-home">Eventos Proximos</h3>
-          <div class="contenedor" id="div-eventos">
-            <div class="row">
-              <div class="col-md-2">
-                <i class="fas fa-file-alt fa-2x text-center"></i>
-              </div>
-              <div class="col-md-10">
-                <p class="mb-0 font-weight-bold">Tarea o Examen</p>
-                <p class="mb-0 small">Fecha</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-2">
-                <i class="fas fa-file-pdf fa-2x text-center"></i>
-              </div>
-              <div class="col-md-10">
-                <p class="mb-0 font-weight-bold">Tarea o Examen</p>
-                <p class="mb-0 small">Fecha</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-2">
-                <i class="fas fa-comment fa-2x text-center"></i>
-              </div>
-              <div class="col-md-10">
-                <p class="mb-0 font-weight-bold">Tarea o Examen</p>
-                <p class="mb-0 small">Fecha</p>
-              </div>
-            </div>
+        <div class="col-md-9">
 
+          <div class="contenedor">
+            <div class="row">
+              <div class="col-12">
+                <h5> Acerca de mi </h5>
+                <hr class="hr-encabezado">
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-3">
+                    Biografia
+                  </div>
+                  <div class="col-9" id="div-biografia">
+                    Biografia del usuario
+                  </div>
+                </div>
+                <hr>
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-3">
+                    Cumpleaños
+                  </div>
+                  <div class="col-9" id="div-cumpleaños">
+                    Fecha de cumpleaños del usuario
+                  </div>
+                </div>
+                <hr>
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-3">
+                    Intereses/Actividades
+                  </div>
+                  <div class="col-9" id="div-intereses">
+                    Intereses y actividades del usuario
+                  </div>
+                </div>
+                <hr>
+              </div>
+              <div class="col-12">
+                <h5> Contacto </h5>
+                <hr class="hr-encabezado">
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-3">
+                    Correos
+                  </div>
+                  <div class="col-9" id="div-intereses">
+                    Correos del usuario
+                  </div>
+                </div>
+                <hr>
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-3">
+                    Telefonos
+                  </div>
+                  <div class="col-9" id="div-intereses">
+                    Telefonos del usuario
+                  </div>
+                </div>
+                <hr>
+              </div>
+            </div>
           </div>
 
         </div>
