@@ -4,11 +4,11 @@ body {
 }
 
 
-a{
+.header a{
   color: #FFFFFF;
 }
 
-a:hover{
+.header a:hover{
   background-color: #3837372f;
   color: #FFFFFF;
 }
