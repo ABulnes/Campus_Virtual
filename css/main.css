@@ -62,3 +62,13 @@ body {
 .hr-encabezado {
   border-top: 1.8px solid rgba(0,0,0, 0.2)
 }
+
+.cur-link{
+  text-decoration: none;
+  color: black;
+}
+
+.cur-link:hover{
+  text-decoration: none;
+  color: black;
+}
