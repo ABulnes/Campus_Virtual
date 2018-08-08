@@ -72,3 +72,11 @@ body {
   text-decoration: none;
   color: black;
 }
+
+.bar-cur{
+  padding: 10px;
+  border-radius: 5%;
+}
+.bar-cur:hover{
+  background-color: rgba(0,0,0, 0.2)
+}
