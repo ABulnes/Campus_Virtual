@@ -1,21 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="../../../../favicon.ico">
-
-  <title>Campus Virtual</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/main.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Campus Virtual - Crear seccion</title>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/fontawesome-all.css">
 </head>
 
 <body>
-
   <nav class="navbar navbar-expand-md header fixed-top">
     <a class="navbar-brand" href="index.html">Campus Virtual</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
@@ -63,96 +59,89 @@
       </form>
     </div>
   </nav>
-
-  <main role="main" style="margin-bottom: 3rem;">
-
-    <div class="container mt-4">
-      <!-- Example row of columns -->
-
-      <h3 class="titulo-home">Publicaciones Recientes</h3>
+  <main style="margin-bottom: 3rem;" role="main" class="mt-4">
+    <div class="contenedor container " style="width: 60%">
       <div class="row">
-        <div class="col-md-8 contenedor" id="div-publicaciones">
-          <div class="row">
-            <div class="col-md-2 text-center">
-              <i class="fas fa-user fa-2x"></i>
-            </div>
-            <div class="col-md-10">
-              <p class="mb-0 font-weight-bold"> Titulo de la publicacion</p>
-              <p class="mb-0">Descripcion</p>
-              <p class="mb-0 small">fecha</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-md-2 text-center">
-              <i class="fas fa-user fa-2x"></i>
-            </div>
-            <div class="col-md-10">
-              <p class="mb-0 font-weight-bold"> Titulo de la publicacion</p>
-              <p class="mb-0">Descripcion</p>
-              <p class="mb-0 small">fecha</p>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-md-2 text-center">
-              <i class="fas fa-user fa-2x"></i>
-            </div>
-            <div class="col-md-10">
-              <p class="mb-0 font-weight-bold"> Titulo de la publicacion</p>
-              <p class="mb-0">Descripcion</p>
-              <p class="mb-0 small">fecha</p>
-            </div>
-            <hr>
-          </div>
-
+        <div class="col-12">
+          <h4>Crear seccion</h4>
+          <hr class="hr-encabezado">
         </div>
-
-        <div class="col-md-4">
-          <h3 class="titulo-home">Eventos Proximos</h3>
-          <div class="contenedor" id="div-eventos">
-            <div class="row">
-              <div class="col-md-2">
-                <i class="fas fa-file-alt fa-2x text-center"></i>
-              </div>
-              <div class="col-md-10">
-                <p class="mb-0 font-weight-bold">Tarea o Examen</p>
-                <p class="mb-0 small">Fecha</p>
-              </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="offset-1 col-3 mt-2 mb-2">
+              Clase
             </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-2">
-                <i class="fas fa-file-pdf fa-2x text-center"></i>
-              </div>
-              <div class="col-md-10">
-                <p class="mb-0 font-weight-bold">Tarea o Examen</p>
-                <p class="mb-0 small">Fecha</p>
-              </div>
+            <div class="col-4 mt-2 mb-2">
+              <select class="form-control" id="slc-clase"></select>
             </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-2">
-                <i class="fas fa-comment fa-2x text-center"></i>
-              </div>
-              <div class="col-md-10">
-                <p class="mb-0 font-weight-bold">Tarea o Examen</p>
-                <p class="mb-0 small">Fecha</p>
-              </div>
-            </div>
-
           </div>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="offset-1 col-3 mt-2 mb-2">
+              Aula
+            </div>
+            <div class="col-4 mt-2 mb-2">
+              <select class="form-control" id="slc-aula"></select>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="offset-1 col-3 mt-2 mb-2">
+              Edificio
+            </div>
+            <div class="col-4 mt-2 mb-2">
+              <select class="form-control" id="slc-edificio"></select>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="offset-1 col-3  mt-2 mb-2">
+              Hora inicio
+            </div>
+            <div class="col-4  mt-2 mb-2">
+              <input type="time" class="form-control" id="txt-horai">
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="offset-1 col-3  mt-2 mb-2">
+              Hora fin
+            </div>
+            <div class="col-4  mt-2 mb-2">
+              <input type="time" class="form-control" id="txt-horai">
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="offset-1 col-3  mt-2 mb-2">
+              Dias
+            </div>
+            <div class="col-6  mt-2 mb-2">
+              <form class="form-inline">
+                <input type="checkbox" class="form-check mr-1" id="chk-lu">Lu &nbsp;
+                <input type="checkbox" class="form-check mr-1" id="chk-ma">Ma &nbsp;
+                <input type="checkbox" class="form-check mr-1" id="chk-mi">Mi&nbsp;
+                <input type="checkbox" class="form-check mr-1" id="chk-ju">Jue&nbsp;
+                <input type="checkbox" class="form-check mr-1" id="chk-vi">Vi&nbsp;
+                <input type="checkbox" class="form-check mr-1" id="chk-sa">Sa&nbsp;
 
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-
-
-
+      <div class="row justify-content-end">
+        <button class="btn btn-outline-primary  mr-4" id="btn-crear">Crear seccion</button>
+      </div>
     </div>
-
   </main>
 
-  <footer class=" navbar navbar-expand footer text-white fixed-bottom">
+  <footer class=" navbar navbar-expand footer fixed-bottom text-white">
     <p>&copy; BD 2018</p>
   </footer>
 
