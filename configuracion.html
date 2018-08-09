@@ -66,16 +66,16 @@
         <div class="col-12 mb-3">
           <div class="nav nav-tabs" role="group">
             <li class="nav-item">
-              <a class="nav-link active d-block" id="link-cuenta">Cuenta</a>
+              <button class="nav-link active bg-transparent" id="link-cuenta" type="button" onclick="Navegacion('info_cuenta','cuenta')">Cuenta</button>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-block" id="link-not">Notificaciones</a>
+              <button class="nav-link bg-transparent" id="link-not" type="button" onclick="Navegacion('info_not','notificacion')">Notificaciones</button>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-block" id="link-msj">Mensajes</a>
+              <button class="nav-link bg-transparent" id="link-msj" type="button" onclick="Navegacion('info_msj','mensaje')">Mensajes</button>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-block" id="link-amg">Amigos</a>
+              <button class="nav-link bg-transparent" id="link-amg" type="button" onclick="Navegacion('info_amg','amigos')">Amigos</button>
             </li>
           </div>
         </div>
@@ -336,6 +336,7 @@
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.js"></script>
+  <script src="js/configuracion.js"></script>
 </body>
 
 </html>
