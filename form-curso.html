@@ -71,8 +71,12 @@
             <div class="offset-2 col-3 mt-2 mb-2">
               Seccion
             </div>
-            <div class="col-4 mt-2 mb-2">
-              <select class="form-control" id="slc-secciones"></select>
+            <div class="col-4 mt-2 mb-2 form-group">
+              <select class="form-control custom-select" id="slc-secciones">
+                <option value="Seleccione seccion">Seleccione seccion</option>
+                <option value="1">Bases de Datos -0700</option>
+              </select>
+              <div class="invalid-feedback">Debe seleccionar una seccion</div>
             </div>
           </div>
         </div>
@@ -83,6 +87,7 @@
             </div>
             <div class="col-4  mt-2 mb-2">
               <input type="text" class="form-control" id="txt-ncurso">
+              <div class="invalid-feedback">Campo Obligatorio</div>
             </div>
           </div>
         </div>
@@ -93,6 +98,7 @@
             </div>
             <div class=" col-4  mt-2 mb-2">
               <textarea class="form-control" id="txt-descripcion"></textarea>
+              <div class="invalid-feedback">Campo Obligatorio</div>
             </div>
           </div>
         </div>
@@ -110,6 +116,7 @@
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.js"></script>
+  <script src="js/curso.js"></script>
 </body>
 
 </html>
