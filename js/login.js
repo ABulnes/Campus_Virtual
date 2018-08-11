@@ -1,15 +1,29 @@
 var correo = $("#txt-correo");
     contraseña = $("#txt-contraseña");
 
+
+function validarCorreo() {
+	var patron = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return (patron.test(correo.val()));
+}
+
 function validar(){
     var listo=true;
-    if(correo.val()==''){
+    if (correo.val() == '') {
         correo.removeClass("is-valid");
-		correo.addClass("is-invalid");
-		listo=false;
-    }else{
-		correo.removeClass("is-invalid");
-		correo.addClass("is-valid");
+        correo.addClass("is-invalid");
+        $("#div-correo").html("Campo Obligatorio");
+    } else {
+        if (!validarCorreo()) {
+            correo.removeClass("is-valid");
+            correo.addClass("is-invalid");
+            $("#div-correo").html("El formato del correo no es correcto");
+            listo = false;
+        } else {
+            correo.removeClass("is-invalid");
+            correo.addClass("is-valid");
+
+        }
     }
     
     if(contraseña.val()==''){
