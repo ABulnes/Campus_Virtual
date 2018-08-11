@@ -35,7 +35,7 @@ function validar(){
 	return listo;
 }
 
-$("#btn-matricular").click(function{
+$("#btn-matricular").click(function(){
 	if (validar()){
 		var parametros = "facultad="+facultad.val()+
 						 "clase="+clase.val()+
