@@ -79,6 +79,8 @@
                                 <option value="3">Archivo</option>
                                 <option value="4">Anuncio</option>
                             </select>
+                            
+                            
                         </div>
                     </div>
                     <br>
@@ -86,6 +88,7 @@
                         <div class="col-md-2">Titulo:</div>
                         <div class="col-md-10">
                             <input type="text" class="form-control" id="txt-titulo" >
+                            <div class="invalid-feedback">Campo Necesario</div>
                         </div>
                     </div>
                     <br>
@@ -93,12 +96,13 @@
                         <div class="col-md-3">Description:</div>
                         <div class="col-md-9">
                             <textarea class="form-control" id="txt-descripcion" rows="3" ></textarea>
+                            <div class="invalid-feedback">Campo Necesario</div>
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-md-4 offset-md-4">
-                            <button type="button" class="btn btn-block btn-outline-primary ">Crear</button>
+                            <button type="button" class="btn btn-block btn-outline-primary" id="btn-crear">Crear</button>
                         </div>
                     </div>
                 </div>
@@ -149,6 +153,7 @@
                                                         <option value="31">31</option>
                                       
                                             </select>
+                                            <div class="invalid-feedback">Campo Necesario</div>
                                         </div>
                                         <div class="col-md-4">
                                                 <select class="form-control" id="slc-mes">
@@ -166,6 +171,7 @@
                                                         <option value="11">Noviembre</option>
                                                         <option value="12">Diciembre</option>
                                                       </select>
+                                                      <div class="invalid-feedback">Campo Necesario</div>
                                         </div>
                                         <div class="col-md-4">
                                                 <select class="form-control" id="slc-anio">
@@ -199,6 +205,7 @@
                                                         <option value="27">2017</option>
                                                         <option value="28">2018</option>
                                                       </select>
+                                                      <div class="invalid-feedback">Campo Necesario</div>
                                         </div>
                                     </div>
                                 </div>
@@ -228,12 +235,13 @@
         </div>
     </main>
     <footer class=" navbar navbar-expand footer text-white fixed-bottom">
-            <p>&copy; BD 2018</p>
-          </footer>
+        <p>&copy; BD 2018</p>
+    </footer>
         
-          <script src="js/jquery-3.3.1.min.js"></script>
-          <script src="js/popper.min.js"></script>
-          <script src="js/bootstrap.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/crearPublicacion.js"></script>
 
 
 </body>
