@@ -7,6 +7,66 @@ var info_cuenta = $("#link-cuenta"),
     mensaje = $("#div-mensajes"),
     amigos = $("#div-amigos");
 
+$(document).ready(function () {
+
+    var parametro = "id_usuario=" + 6 +
+        "&flag=" + 0 +
+        "&cflag=" + 1;
+    $.ajax({
+        url: "ajax/api.php?accion='obtenerPerfil'",
+        data: parametro,
+        dataType: "json",
+        success: function (respuesta) {
+            $("#btn-usuario").html(respuesta[0].nombre_usuario);
+            $("#txt-pnombre").val(respuesta[0].p_nombre);
+            $("#txt-snombre").val(respuesta[0].s_nombre);
+            $("#txt-papellido").val(respuesta[0].p_apellido);
+            $("#txt-sapellido").val(respuesta[0].s_apellido);
+            $("#txt-nusuario").val(respuesta[0].nombre_usuario);
+            $("#txt-biografia").val(respuesta[0].biografia);
+            $("#txt-interes").val(respuesta[0].intereses);
+            $("#txt-correo").val(respuesta[0].correo);
+            $("#txt-telefono").val(respuesta[0].telefono);
+            if (respuesta[1].config.notifiacion_curso == 'A') {
+                $("#slc-acceso option[value='A']").attr("selected", true);
+            } else {
+                $("#slc-acceso option[value='I']").attr("selected", true);
+            }
+            if (respuesta[1].config.notificacion_publicacion == 'A') {
+                $("#slc-not-pub option[value='A']").attr("selected", true);
+            } else {
+                $("#slc-not-pub option[value='I']").attr("selected", true);
+            }
+            switch (respuesta[1].config.envio_mensaje) {
+                case 'T':
+                    $("#slc-mensaje option[value='T']").attr("selected", true);
+                    break;
+                case 'A':
+                    $("#slc-mensaje option[value='A']").attr("selected", true);
+                    break;
+                case 'N':
+                    $("#slc-mensaje option[value='N']").attr("selected", true);
+                    break;
+            }
+            switch (respuesta[1].config.config_amigos) {
+                case 'T':
+                    $("#slc-amigos option[value='T']").attr("selected", true);
+                    break;
+                case 'A':
+                    $("#slc-amigos option[value='A']").attr("selected", true);
+                    break;
+                case 'N':
+                    $("#slc-amigos option[value='N']").attr("selected", true);
+                    break;
+            }
+            if (respuesta[1].config.notificacion_solicitud == 'A') {
+                $("#slc-not-amg option[value='A']").attr("selected", true);
+            } else {
+                $("#slc-not-amg option[value='I']").attr("selected", true);
+            }
+        }
+    });
+});
 /**
  * Funcion que activa los botones en funcion del origen
  * @param {*} btn_origen 
@@ -122,13 +182,13 @@ function findDestinoDiv(div) {
  * @param {*} btn 
  */
 function Navegacion(btn, div) {
-    console.log(div);
+
     var btn_origen = findOrigen();
     var btn_destino = findDestino(btn);
     var div_origen = findOrigenDiv();
-    console.log(div_origen);
+
     var div_destino = findDestinoDiv(div);
-    console.log(div_destino);
+
     cambiarDiv(div_origen, div_destino);
     verificarNav(btn_origen, btn_destino);
 

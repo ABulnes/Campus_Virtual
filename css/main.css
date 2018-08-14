@@ -80,3 +80,7 @@ body {
 .bar-cur:hover{
   background-color: rgba(0,0,0, 0.2)
 }
+.dropdown-menu-right{
+    right: 0;
+    left: auto;
+}

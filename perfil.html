@@ -9,7 +9,7 @@
   <link rel="icon" href="../../../../favicon.ico">
 
   <title>Campus Virtual</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="css/fontawesome-all.css">
 </head>
@@ -44,14 +44,14 @@
           <i class="fas fa-bell fa-lg"></i>
         </button>
         <div class="user-pic">
-          <img class="img-fluid" src="img/usuario.png">
+          <label for="btn-usuario"><img class="img-fluid" src="img/usuario.png"></label>
         </div>
-        <div class="dropdown dropdown-menu-left">
-          <button class="btn bg-transparent text-white mn-btn dropdown-toggle" type="button" id="btn-usuario" data-toggle="dropdown"
+        <div class="dropdown  mr-4">
+          <button class="btn bg-transparent p-1 text-white mn-btn dropdown-toggle" type="button" id="btn-usuario" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Nombre Usuario
+           
           </button>
-          <div class="dropdown-menu  mn-drop" aria-labelledby="btn-usuario">
+          <div class="dropdown-menu dropdown-menu-right  mn-drop" aria-labelledby="btn-usuario">
             <a class="dropdown-item text-white" href="perfil.html">Perfil</a>
             <a class="dropdown-item text-white" href="configuracion.html">Configuracion</a>
             <div class="dropdown-divider"></div>
@@ -82,13 +82,13 @@
               </button>
             </div>
             <div class="col-12 item-center mt-3">
-              <h4 id="h-uname">Nombre del Usuario</h4>
+              <h4 id="h-uname" class="text-center"></h4>
             </div>
             <div class="col-12 item-center mt-3">
-              <h5 id="h-name">Nombre de la persona</h5>
+              <h5 id="h-name"></h5>
             </div>
             <div class="col-12 item-center mt-3">
-              <h6 id="h-tusuario">Alumno/Docente</h6>
+              <h6 id="h-tusuario"></h6>
             </div>
           </div>
         </div>
@@ -107,7 +107,7 @@
                     Biografia
                   </div>
                   <div class="col-9" id="div-biografia">
-                    Biografia del usuario
+                    
                   </div>
                 </div>
                 <hr>
@@ -117,8 +117,8 @@
                   <div class="col-3">
                     Cumpleaños
                   </div>
-                  <div class="col-9" id="div-cumpleaños">
-                    Fecha de cumpleaños del usuario
+                  <div class="col-9" id="div-nac">
+                   
                   </div>
                 </div>
                 <hr>
@@ -129,7 +129,7 @@
                     Intereses/Actividades
                   </div>
                   <div class="col-9" id="div-intereses">
-                    Intereses y actividades del usuario
+                    
                   </div>
                 </div>
                 <hr>
@@ -143,8 +143,8 @@
                   <div class="col-3">
                     Correos
                   </div>
-                  <div class="col-9" id="div-intereses">
-                    Correos del usuario
+                  <div class="col-9" id="div-correo">
+                    
                   </div>
                 </div>
                 <hr>
@@ -154,8 +154,8 @@
                   <div class="col-3">
                     Telefonos
                   </div>
-                  <div class="col-9" id="div-intereses">
-                    Telefonos del usuario
+                  <div class="col-9" id="div-telefono">
+                   
                   </div>
                 </div>
                 <hr>
@@ -166,30 +166,10 @@
         </div>
         <div class="offset-3 col-md-9 mt-4">
           <div class="contenedor">
-            <div class="row">
+            <div class="row" id="div-cursos">
               <div class="col-12">
                 <h5> Cursos </h5>
                 <hr class="hr-encabezado">
-              </div>
-              <div class="col-12">
-                <div class="row">
-                  <div class="col-3 item-center">
-                    <i class="fas fa-users fa-3x"></i>
-                  </div>
-                  <div class="col-9">
-                    <a class="d-block">Nombre del curso</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 mt-2">
-                <div class="row">
-                  <div class="col-3 item-center">
-                    <i class="fas fa-users fa-3x"></i>
-                  </div>
-                  <div class="col-9">
-                    <a class="d-block">Nombre del curso</a>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -210,6 +190,8 @@
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.js"></script>
+  <script src="js/bootstrap.bundle.js"></script>
+  <script src="js/perfil.js"></script>
 </body>
 
 </html>
