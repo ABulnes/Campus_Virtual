@@ -110,7 +110,6 @@
 					$perfil[]["config"] = self::getConfiguracionUsuario($conexion,$idUsuario);
 				}
 		   }
-		   
            return json_encode($perfil);
         }
 
@@ -149,6 +148,7 @@
 				    WHERE id_usuario =".$idUsuario;
 			$result = $conexion->ejecutarConsulta($sql);
 			$config = $conexion->obtenerFila($result);
+			
 			return $config;
 		}
 

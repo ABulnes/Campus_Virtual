@@ -24,19 +24,26 @@ $(document).ready(function () {
             $("#div-intereses").html(respuesta[0].intereses);
             $("#div-correo").html(respuesta[0].correo);
             $("#div-telefono").html(respuesta[0].telefono);
-            for (var i = 0; i < respuesta[1].cursos.length; i++) {
+            if (respuesta[1].cursos.length != 0) {
+                for (var i = 0; i < respuesta[1].cursos.length; i++) {
+                    $("#div-cursos").append(
+                        '<div class="col-12">' +
+                        '<div class="row">' +
+                        '<div class="col-3 item-center">' +
+                        '<i class="fas fa-users fa-3x"></i>' +
+                        '</div>' +
+                        '<div class="col-9">' +
+                        '<a class="d-block">' + respuesta[1].cursos[i].nombre_curso + '</a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>'
+                    );
+                }
+            }else{
                 $("#div-cursos").append(
-                    '<div class="col-12">' +
-                    '<div class="row">' +
-                    '<div class="col-3 item-center">' +
-                    '<i class="fas fa-users fa-3x"></i>' +
-                    '</div>' +
-                    '<div class="col-9">' +
-                    '<a class="d-block">' + respuesta[1].cursos[i].nombre_curso + '</a>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>'
-                );
+                    '<div class="col-12">No posee cursos en este periodo</div>'
+                        
+                )
             }
         },
         error: function (error) {

@@ -9,7 +9,7 @@ var info_cuenta = $("#link-cuenta"),
 
 $(document).ready(function () {
 
-    var parametro = "id_usuario=" + 6 +
+    var parametro = "id_usuario=" + 8 +
         "&flag=" + 0 +
         "&cflag=" + 1;
     $.ajax({
@@ -17,6 +17,7 @@ $(document).ready(function () {
         data: parametro,
         dataType: "json",
         success: function (respuesta) {
+            
             $("#btn-usuario").html(respuesta[0].nombre_usuario);
             $("#txt-pnombre").val(respuesta[0].p_nombre);
             $("#txt-snombre").val(respuesta[0].s_nombre);
@@ -64,6 +65,9 @@ $(document).ready(function () {
             } else {
                 $("#slc-not-amg option[value='I']").attr("selected", true);
             }
+        },
+        error:function(error){
+            console.log(error);
         }
     });
 });

@@ -50,3 +50,20 @@ function parseFecha(fecha) {
     return ffecha;
 
 }
+
+/**
+ * Funcion que permite seleccionar el icono segun la tarea o foro
+ * @param {*} flag 
+ */
+function iconoEvento(flag) {
+    var icono = "";
+    if (flag == 0) {
+        icono = "<i class='fas fa-file fa-2x'></i>";
+    }else{
+        if(flag == 1){
+            icono = "<i class='fas fa-comment fa-2x'></i>";
+        }
+    }
+
+    return icono;
+}
