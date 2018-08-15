@@ -4,6 +4,8 @@ var tipoPublicacion = $("#slc-tipoPublicacion");
     dia = $("#slc-dia");
     mes = $("#slc-mes");
     anio = $("#slc-anio");
+    preguntas = $("#preguntas");
+    preguntasSeleccionadas = $("#preguntas option:selected").length;
 
 function validar(){
     var listo=true;
@@ -91,6 +93,42 @@ function validar(){
                              "&anio"+anio.val();
             console.log(parametros);
         }
+    }else if (tipoPublicacion.val()==2){
+        if (titulo.val()==''){
+            titulo.removeClass("is-valid");
+            titulo.addClass("is-invalid");
+            listo=false;
+        }else{
+            titulo.removeClass("is-invalid");
+            titulo.addClass("is-valid");
+        }
+    
+        if (descripcion.val()==''){
+            descripcion.removeClass("is-valid");
+            descripcion.addClass("is-invalid");
+            listo=false;
+        }else{
+            descripcion.removeClass("is-invalid");
+            descripcion.addClass("is-valid");
+        }
+
+        if(preguntasSeleccionadas.length>0){
+            preguntas.removeClass('is-invalid');
+            preguntas.addClass('is-valid');
+        }else{
+            preguntas.removeClass("is-valid");
+            preguntas.addClass("is-invalid");
+            listo=false;
+        }
+
+        if(listo){
+            var parametros = "&tipoPublicacion"+tipoPublicacion.val()+
+                             "&titulo"+titulo.val()+
+                             "&descripcion"+descripcion.val()+
+                             "preguntas"+preguntas.val();
+            console.log(parametros);
+        }
+
     }   
 
 }
@@ -98,3 +136,4 @@ function validar(){
 $("#btn-crear").click(function(){
 	validar();
 });
+

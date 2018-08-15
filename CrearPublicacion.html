@@ -12,6 +12,8 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="css/fontawesome-all.css">
+   
+
 </head>
 
 <body>
@@ -224,7 +226,23 @@
                         <div class="col-md-12 contenedor">
                             <h4>Examen</h4>
                             <br>
-                            <div class="row">
+                            <div class="col-md-12">
+                                <h5>Selecciones las preguntas(Mantenga presionado Ctrl 
+                                    y seleccione las preguntas que desee)</h5>
+                            <br>
+                            <div class="col-md-12">
+                                <select multiple id="preguntas" class="col-md-10 offset-md-1" size="8" name="preguntas[]">
+                                    <option value="1">Pregunta 1....</option>
+                                    <option value="2">Pregunta 2....</option>
+                                    <option value="3">Pregunta 3....</option>
+                                    <option value="4">Pregunta 4....</option>
+                                    <option value="5">Pregunta 5....</option>
+                                    <option value="6">Pregunta 6....</option>
+                                </select>
+                                <div class="invalid-feedback">Selecciones preguntas</div>
+                            </div>
+                                
+                            </div>
 
                             </div>
                         </div>
@@ -242,6 +260,7 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/crearPublicacion.js"></script>
+    
 
 
 </body>
