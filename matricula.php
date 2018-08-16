@@ -15,7 +15,10 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md header fixed-top">
+   
+    <?php
+      include("header.php");
+    ?>
         <a class="navbar-brand" href="home.html">Campus Virtual</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
           aria-expanded="false" aria-label="Toggle navigation">

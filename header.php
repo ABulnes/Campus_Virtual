@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link href="css/bootstrap.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/fontawesome-all.css">
-</head>
-
-<body>
   <nav class="navbar navbar-expand-md header fixed-top">
-    <a class="navbar-brand" href="home.html">Campus Virtual</a>
+    <a class="navbar-brand" href="home.php">Campus Virtual</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -22,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="cursos.html">Cursos
+          <a class="nav-link" href="cursos.php">Cursos
           </a>
         </li>
         <li class="nav-item">
@@ -30,10 +17,10 @@
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <button class="btn bg-transparent text-white mn-btn my-2 my-sm-0 ml-2" type="button" id="btn-amigos" onclick="location.href='amigos.html'">
+        <button class="btn bg-transparent text-white mn-btn my-2 my-sm-0 ml-2" type="button" id="btn-amigos" onclick="location.href='amigos.php'">
           <i class="fas fa-user fa-lg"></i>
         </button>
-        <button class="btn bg-transparent text-white mn-btn my-2 my-sm-0 ml-2" type="button" id="btn-mensajes" onclick="location.href='mensajes.html'">
+        <button class="btn bg-transparent text-white mn-btn my-2 my-sm-0 ml-2" type="button" id="btn-mensajes" onclick="location.href='mensajes.php'">
           <i class="fas fa-comment-alt fa-lg"></i>
         </button>
         <div class="dropdown">
@@ -56,8 +43,8 @@
             Nombre Usuario
           </button>
           <div class="dropdown-menu dropdown-menu-right  mn-drop" aria-labelledby="btn-usuario">
-            <a class="dropdown-item text-white" href="perfil.html">Perfil</a>
-            <a class="dropdown-item text-white" href="configuracion.html">Configuracion</a>
+            <a class="dropdown-item text-white" href="perfil.php">Perfil</a>
+            <a class="dropdown-item text-white" href="configuracion.php">Configuracion</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item text-white" href="#">Cerrar Sesion &nbsp;
               <i class="fas fa-sign-out-alt fa-lg"></i>
@@ -68,10 +55,4 @@
     </div>
   </nav>
 
-  <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.js"></script>
-
-</body>
-
-</html>
+ 

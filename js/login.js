@@ -50,7 +50,7 @@ $("#btn-ingresar").click(function () {
                 console.log(respuesta);
                 if (respuesta[1].codigo_error == 0){
                     window.setTimeout(null,3000);
-                    location.href="index.html";
+                    location.href="home.html";
                 }
             },
             error: function (error) {

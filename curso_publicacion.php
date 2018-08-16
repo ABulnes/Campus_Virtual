@@ -16,53 +16,10 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-md header fixed-top">
-    <a class="navbar-brand" href="home.html">Campus Virtual</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="cursos.html">Cursos
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Matricula</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <button class="btn bg-transparent text-white mn-btn my-2 my-sm-0 ml-2" type="button">
-          <i class="fas fa-user fa-lg"></i>
-        </button>
-        <button class="btn bg-transparent text-white mn-btn my-2 my-sm-0 ml-2" type="button">
-          <i class="fas fa-comment-alt fa-lg"></i>
-        </button>
-        <button class="btn bg-transparent text-white mn-btn my-2 my-sm-0 ml-2 mr-4" type="button">
-          <i class="fas fa-bell fa-lg"></i>
-        </button>
-        <div class="user-pic">
-          <img class="img-fluid" src="img/usuario.png">
-        </div>
-        <div class="dropdown dropdown-menu-left">
-          <button class="btn bg-transparent text-white mn-btn dropdown-toggle" type="button" id="btn-usuario" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Nombre Usuario
-          </button>
-          <div class="dropdown-menu  mn-drop" aria-labelledby="btn-usuario">
-            <a class="dropdown-item text-white" href="perfil.html">Perfil</a>
-            <a class="dropdown-item text-white" href="configuracion.html">Configuracion</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-white" href="#">Cerrar Sesion &nbsp;
-              <i class="fas fa-sign-out-alt fa-lg"></i>
-            </a>
-          </div>
-        </div>
-      </form>
-    </div>
-  </nav>
+ 
+      <?php
+         include("header.php");
+       ?>
 
   <main role="main" style="margin-bottom: 3rem;">
     <!--Panel del curso-->
