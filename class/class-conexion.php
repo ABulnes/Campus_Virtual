@@ -18,6 +18,10 @@
             return sqlsrv_query($this->link,$sql);
         }
 
+        public function ejectuarSP($sql,$params){
+            return sqlsrv_query($this->link,$sql,$params);
+        }
+
         public function obtenerFila($resultado){
             return sqlsrv_fetch_array($resultado);
         }
@@ -32,6 +36,10 @@
 
         public function cantidadRegistros($resultado){
             return sqlsrv_num_rows($resultado);
+        }
+
+        public function obtenerParametros($result){
+            return sqlsrv_next_result($result);
         }
     };
 

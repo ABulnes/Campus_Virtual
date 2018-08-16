@@ -85,7 +85,44 @@
 		public function setCurso($curso){
 			$this->curso = $curso;
 		}
-
+        //Funcion que ingresa el usuario
+		public static function agregarUsuario($pnombre,$snombre,$papellido,$sapellido,$num_id,$correo,$telefono,$direccion,$genero,$fecha_nac,$tusuario,$nusaurio,$contrasenia,$conexion){
+			$pcMensaje = "";
+			$pbOcurreError = 1;
+			$mensaje = array();
+			$ts_sql = "{CALL [dbo].[SP_GESTION_USUARIO](?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+			$params = array(
+					array($pnombre,SQLSRV_PARAM_IN),
+					array($snombre,SQLSRV_PARAM_IN),
+					array($papellido,SQLSRV_PARAM_IN),
+					array($sapellido,SQLSRV_PARAM_IN),
+					array($num_id,SQLSRV_PARAM_IN),
+					array($correo,SQLSRV_PARAM_IN),
+					array($telefono,SQLSRV_PARAM_IN),
+					array($direccion,SQLSRV_PARAM_IN),
+					array($genero,SQLSRV_PARAM_IN),
+					array($fecha_nac,SQLSRV_PARAM_IN),
+					array($tusuario,SQLSRV_PARAM_IN),
+					array($nusaurio,SQLSRV_PARAM_IN),
+					array($contrasenia,SQLSRV_PARAM_IN),
+					array("AGREGAR",SQLSRV_PARAM_IN),
+					array($pcMensaje,SQLSRV_PARAM_OUT),
+					array($pbOcurreError,SQLSRV_PARAM_OUT)
+			);
+			$result = $conexion->ejectuarSP($ts_sql,$params);
+			if($result){
+				while($conexion->obtenerFila($result)){
+					
+				}
+				while($fila = $conexion->obtenerParametros($result)){
+				}
+				$mensaje[]["Mensaje"] = "El usuario se ingreso con exito";
+				$mensaje[]["codigo_error"] = $pbOcurreError;
+				sqlsrv_next_result($result);
+			}
+			 
+			 return json_encode($mensaje);
+		}
         /**Funcion que obtiene el perfil de un usuario */
         public static function getPerfil($conexion,$idUsuario,$flag,$cflag){
             $perfil = array();

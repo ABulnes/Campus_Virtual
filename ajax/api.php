@@ -11,6 +11,24 @@
         case "'obtenerPublicacion'":
             echo Publicacion::getPublicacion($conexion,$_GET["flag"],$_GET["id_usuario"]);
         break;
+        
+        case "'agregarUsuario'":
+            echo Usuario::agregarUsuario($_GET["pnombre"],
+                                         $_GET["snombre"],
+                                         $_GET["papellido"],
+                                         $_GET["sapellido"],
+                                         $_GET["id"],
+                                         $_GET["correo"],
+                                         $_GET["telefono"],
+                                         $_GET["direccion"],
+                                         $_GET["genero"],
+                                         $_GET["fecha_nac"],
+                                         $_GET["tusuario"],
+                                         $_GET["nusuario"],
+                                         $_GET["contrasenia"],
+                                         $conexion   
+                                        );
+        break;
     }
 
 

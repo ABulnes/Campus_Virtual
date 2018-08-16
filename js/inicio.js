@@ -7,7 +7,7 @@ $(document).ready(function () {
         url: "ajax/api.php?accion='obtenerPublicacion'",
         dataType: "json",
         success: function (respuesta) {
-
+            console.log(respuesta);
             if (respuesta[0].publicacion.length != 0) {
                 for (var i = 0; i < respuesta[0].publicacion.length; i++) {
                     $("#div-publicaciones").append(

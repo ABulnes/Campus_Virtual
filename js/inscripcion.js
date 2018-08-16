@@ -119,11 +119,13 @@ function validar() {
             genero = m.val();
             m.addClass("is-valid");
             m.removeClass("is-invalid");
+            f.removeClass("is-invalid");
         } else {
             if (f.is(':checked')) {
                 genero = f.val();
                 f.addClass("is-valid");
                 f.removeClass("is-invalid");
+                m.removeClass("is-invalid");
             }
         }
     }
@@ -162,11 +164,13 @@ function validar() {
             tusuario = alumno.val();
             alumno.addClass("is-valid");
             alumno.removeClass("is-invalid");
+            docente.removeClass("is-invalid");
         } else {
             if (docente.is(':checked')) {
                 tusuario = docente.val();
                 docente.addClass("is-valid");
                 docente.removeClass("is-invalid");
+                alumno.removeClass("is-invalid");
 
             }
         }
@@ -248,10 +252,26 @@ $("#btn-finalizar").click(function () {
             "&telefono=" + telefono.val() +
             "&direccion=" + direccion.val() +
             "&genero=" + genero +
-            "&fecha_nac" + fecha_nac +
+            "&fecha_nac=" + fecha_nac +
             "&tusuario=" + tusuario +
             "&nusuario=" + nusuario.val() +
             "&contrasenia=" + contraseña.val();
-       
+        console.log(parametros);
+        $.ajax({
+            url: "ajax/api.php?accion='agregarUsuario'",
+            data: parametros,
+            dataType: "json",
+            success: function (respuesta) {
+                console.log(respuesta);
+                alert(respuesta[0].Mensaje);
+                if (respuesta[1].codigo_error == 0){
+                    window.setTimeout(null,5000);
+                    location.href = "login.html";
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
     }
 });
