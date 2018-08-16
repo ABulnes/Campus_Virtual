@@ -6,10 +6,12 @@
     $conexion = new Conexion();
     switch($_GET["accion"]){
         case "'obtenerPerfil'":
-            echo Usuario::getPerfil($conexion,$_GET["id_usuario"],$_GET["flag"],$_GET["cflag"]);
+            session_start();
+            echo Usuario::getPerfil($conexion,$_SESSION["id_usuario"],$_GET["flag"],$_GET["cflag"]);
         break;
         case "'obtenerPublicacion'":
-            echo Publicacion::getPublicacion($conexion,$_GET["flag"],$_GET["id_usuario"]);
+            session_start();
+            echo Publicacion::getPublicacion($conexion,$_GET["flag"],$_SESSION["id_usuario"]);
         break;
         
         case "'agregarUsuario'":
@@ -28,6 +30,24 @@
                                          $_GET["contrasenia"],
                                          $conexion   
                                         );
+        break;
+        case "'Login'":
+                session_start();
+                if((isset($_SESSION["id_usuario"]) && isset($_SESSION["nombre_usuario"]))){
+                    echo 1;
+                }else{
+                    echo 0;
+                }
+        break;
+        case "'Log-out'":
+                if(session_destroy()){
+                    echo 1;
+                }else{
+                    echo 0;
+                }
+        break;
+        case "'iniciarSesion'":
+               echo Usuario::iniciarSesion($conexion,$_GET["correo"],$_GET["contraseña"]);                        
         break;
     }
 

@@ -1,6 +1,14 @@
 $.getScript("js/funciones.js");
 
 $(document).ready(function () {
+    $.ajax({
+        url: "ajax/api.php?accion='Login'",
+        success: function (respuesta) {
+            if (respuesta == 0) {
+                location.href = "index.html";
+            }
+        }
+    });
     var flag = 0;
     var parametro = "id_usuario=" + 8 +
         "&flag=" + 0 +
@@ -39,10 +47,10 @@ $(document).ready(function () {
                         '</div>'
                     );
                 }
-            }else{
+            } else {
                 $("#div-cursos").append(
                     '<div class="col-12">No posee cursos en este periodo</div>'
-                        
+
                 )
             }
         },

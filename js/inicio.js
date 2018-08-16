@@ -1,5 +1,14 @@
 $.getScript("js/funciones.js");
 $(document).ready(function () {
+   
+    $.ajax({
+        url: "ajax/api.php?accion='Login'",
+        success:function(respuesta){
+           if(respuesta==0){
+               location.href = "index.html";
+           }
+        }
+    });
     var parametros = "id_usuario=" + 8 +
         "&flag=" + 0;
     $.ajax({

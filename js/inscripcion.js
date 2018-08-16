@@ -263,7 +263,7 @@ $("#btn-finalizar").click(function () {
             dataType: "json",
             success: function (respuesta) {
                 console.log(respuesta);
-                alert(respuesta[0].Mensaje);
+                alert(respuesta[0].mensaje);
                 if (respuesta[1].codigo_error == 0){
                     window.setTimeout(null,5000);
                     location.href = "login.html";

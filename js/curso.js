@@ -2,7 +2,16 @@ var seccion = $("#slc-secciones"),
     n_curso = $("#txt-ncurso");
     descripcion = $("#txt-descripcion");
 
-
+$(document).ready(function(){
+    $.ajax({
+        url: "ajax/api.php?accion='Login'",
+        success:function(respuesta){
+           if(respuesta==0){
+               location.href = "index.html";
+           }
+        }
+    });
+});
 /**
  * Funcion para validar el formulario
  */

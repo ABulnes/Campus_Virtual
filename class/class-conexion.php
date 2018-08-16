@@ -25,6 +25,10 @@
         public function obtenerFila($resultado){
             return sqlsrv_fetch_array($resultado);
         }
+        
+        public function obtenerFilaAssoc($resultado){
+            return sqlsrv_fetch_array($resultado,SQLSRV_FETCH_ASSOC);
+        }
 
         public function cerrarConexion(){
             sqlsrv_close($this->link);

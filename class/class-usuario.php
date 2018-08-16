@@ -87,7 +87,7 @@
 		}
         //Funcion que ingresa el usuario
 		public static function agregarUsuario($pnombre,$snombre,$papellido,$sapellido,$num_id,$correo,$telefono,$direccion,$genero,$fecha_nac,$tusuario,$nusaurio,$contrasenia,$conexion){
-			$pcMensaje = "";
+			$pcMensaje = str_repeat("\0",2000);
 			$pbOcurreError = 1;
 			$mensaje = array();
 			$ts_sql = "{CALL [dbo].[SP_GESTION_USUARIO](?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
@@ -111,14 +111,11 @@
 			);
 			$result = $conexion->ejectuarSP($ts_sql,$params);
 			if($result){
-				while($conexion->obtenerFila($result)){
-					
-				}
-				while($fila = $conexion->obtenerParametros($result)){
-				}
-				$mensaje[]["Mensaje"] = "El usuario se ingreso con exito";
+				while($conexion->obtenerParametros($result)){
+				};
+				$mensaje[]["mensaje"] = $pcMensaje;
 				$mensaje[]["codigo_error"] = $pbOcurreError;
-				sqlsrv_next_result($result);
+				
 			}
 			 
 			 return json_encode($mensaje);
@@ -178,7 +175,7 @@
             }
             return $cursos;
 		}
-		
+		//Funcion que retorna la configuracion del usuario
 		public static function getConfiguracionUsuario($conexion,$idUsuario){
 			$config = array();
 			$sql = "SELECT config_amigos,notifiacion_curso,notificacion_de_envio,notificacion_publicacion,envio_mensaje,notificacion_solicitud FROM Configuracion
@@ -187,6 +184,36 @@
 			$config = $conexion->obtenerFila($result);
 			
 			return $config;
+		}
+
+		//Funcion que verifica el inicio de sesion del usuario
+		public static function iniciarSesion($conexion,$correo,$contrasenia){
+			$pcMensaje = str_repeat("\0",2000);
+			$login = array();
+			$pnIDUsuario = 0;
+			$pcNombreUsuario = str_repeat("\0",200);
+			$pbOcurreError = 1;
+			$ts_sql = "{CALL [dbo].[SP_LOGIN](?,?,?,?,?,?)}";
+			$params = array(
+							 array($correo,SQLSRV_PARAM_IN),
+							 array($contrasenia,SQLSRV_PARAM_IN),
+							 array($pcMensaje,SQLSRV_PARAM_OUT),
+							 array($pnIDUsuario,SQLSRV_PARAM_OUT),
+							 array($pcNombreUsuario,SQLSRV_PARAM_OUT),
+							 array($pbOcurreError,SQLSRV_PARAM_OUT)
+							);
+			$result = $conexion->ejectuarSP($ts_sql,$params);
+			if($result){
+				while($conexion->obtenerParametros($result)){};
+					session_start();
+					$_SESSION["id_usuario"] = $pnIDUsuario;
+					$_SESSION["nombre_usuario"] = $pcNombreUsuario;
+					$login[]["mensaje"] = $pcMensaje;
+					$login[]["codigo_error"] = $pbOcurreError;	
+			}
+			
+			return json_encode($login);
+		
 		}
 
 	}

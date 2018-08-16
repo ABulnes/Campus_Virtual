@@ -8,7 +8,14 @@ var info_cuenta = $("#link-cuenta"),
     amigos = $("#div-amigos");
 
 $(document).ready(function () {
-
+    $.ajax({
+        url: "ajax/api.php?accion='Login'",
+        success: function (respuesta) {
+            if (respuesta == 0) {
+                location.href = "index.html";
+            }
+        }
+    });
     var parametro = "id_usuario=" + 8 +
         "&flag=" + 0 +
         "&cflag=" + 1;
@@ -17,7 +24,7 @@ $(document).ready(function () {
         data: parametro,
         dataType: "json",
         success: function (respuesta) {
-            
+
             $("#btn-usuario").html(respuesta[0].nombre_usuario);
             $("#txt-pnombre").val(respuesta[0].p_nombre);
             $("#txt-snombre").val(respuesta[0].s_nombre);
@@ -66,7 +73,7 @@ $(document).ready(function () {
                 $("#slc-not-amg option[value='I']").attr("selected", true);
             }
         },
-        error:function(error){
+        error: function (error) {
             console.log(error);
         }
     });
