@@ -7,16 +7,7 @@ anio = $("#slc-anio");
 preguntas = $("#preguntas");
 preguntasSeleccionadas = $("#preguntas option:selected").length;
 
-$(document).ready(function () {
-    $.ajax({
-        url: "ajax/api.php?accion='Login'",
-        success: function (respuesta) {
-            if (respuesta == 0) {
-                location.href = "index.html";
-            }
-        }
-    });
-});
+
 
 function validar() {
     var listo = true;
@@ -146,4 +137,15 @@ function validar() {
 
 $("#btn-crear").click(function () {
     validar();
+});
+$("#btn-cerrar").click(function () {
+    $.ajax({
+        url: "ajax/api.php?accion='Log-out'",
+        success: function (respuesta) {
+            console.log(respuesta);
+            if (respuesta == 1){
+                location.href="index.html";
+            }
+        }
+    });
 });

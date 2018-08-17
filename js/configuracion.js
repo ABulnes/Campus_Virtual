@@ -8,23 +8,15 @@ var info_cuenta = $("#link-cuenta"),
     amigos = $("#div-amigos");
 
 $(document).ready(function () {
-    $.ajax({
-        url: "ajax/api.php?accion='Login'",
-        success: function (respuesta) {
-            if (respuesta == 0) {
-                location.href = "index.html";
-            }
-        }
-    });
-    var parametro = "id_usuario=" + 8 +
-        "&flag=" + 0 +
-        "&cflag=" + 1;
+    
+  
+        
     $.ajax({
         url: "ajax/api.php?accion='obtenerPerfil'",
-        data: parametro,
+        data: "cflag=" + 1,
         dataType: "json",
         success: function (respuesta) {
-
+            console.log(respuesta);
             $("#btn-usuario").html(respuesta[0].nombre_usuario);
             $("#txt-pnombre").val(respuesta[0].p_nombre);
             $("#txt-snombre").val(respuesta[0].s_nombre);
@@ -204,3 +196,14 @@ function Navegacion(btn, div) {
     verificarNav(btn_origen, btn_destino);
 
 }
+$("#btn-cerrar").click(function () {
+    $.ajax({
+        url: "ajax/api.php?accion='Log-out'",
+        success: function (respuesta) {
+            console.log(respuesta);
+            if (respuesta == 1){
+                location.href="index.html";
+            }
+        }
+    });
+});

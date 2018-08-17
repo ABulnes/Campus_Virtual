@@ -116,6 +116,8 @@
 				$mensaje[]["mensaje"] = $pcMensaje;
 				$mensaje[]["codigo_error"] = $pbOcurreError;
 				
+			}else{
+				die(print_r(sqlsrv_errors(),true));
 			}
 			 
 			 return json_encode($mensaje);
@@ -137,6 +139,7 @@
             while($fila = $conexion->obtenerFila($result)){
                     $perfil[] = $fila;
 				}
+		   //echo $sql;
 		   if($cflag==0){
 		  		 $perfil[]["cursos"] = self::getCursosUsuario($conexion,$idUsuario,$flag);
 		   }else {
@@ -144,6 +147,8 @@
 					$perfil[]["config"] = self::getConfiguracionUsuario($conexion,$idUsuario);
 				}
 		   }
+		   
+		   $perfil[]["flag"] = $_SESSION["flag"];
            return json_encode($perfil);
         }
 
@@ -162,13 +167,12 @@
                             WHERE cur.id_seccion IN(
                                                     SELECT id_seccion FROM Seccion s
                                                     INNER JOIN Docente d ON d.id_docente= s.id_docente
-													INNER JOIN Seccion s ON s.id_seccion = m.id_seccion
 													INNER JOIN Periodo p ON p.id_periodo = s.id_periodo
-                                                    WHERE d.id_usuario = ".$idUsuario." AND GETDATE() BETWEEN p.fecha_inicio AND p.fecha_fin)
+                                                    WHERE d.id_usuario = ".$idUsuario." AND GETDATE() BETWEEN p.fecha_inicio AND p.fecha_fin
                                                     )";
                 }
             }
-           
+            //echo $sql;
             $result = $conexion->ejecutarConsulta($sql);
             while($fila = $conexion->obtenerFila($result)){
                 $cursos[] = $fila;
@@ -179,7 +183,8 @@
 		public static function getConfiguracionUsuario($conexion,$idUsuario){
 			$config = array();
 			$sql = "SELECT config_amigos,notifiacion_curso,notificacion_de_envio,notificacion_publicacion,envio_mensaje,notificacion_solicitud FROM Configuracion
-				    WHERE id_usuario =".$idUsuario;
+					WHERE id_usuario =".$idUsuario;
+			
 			$result = $conexion->ejecutarConsulta($sql);
 			$config = $conexion->obtenerFila($result);
 			
@@ -193,14 +198,16 @@
 			$pnIDUsuario = 0;
 			$pcNombreUsuario = str_repeat("\0",200);
 			$pbOcurreError = 1;
-			$ts_sql = "{CALL [dbo].[SP_LOGIN](?,?,?,?,?,?)}";
+			$pnflag = -1;
+			$ts_sql = "{CALL [dbo].[SP_LOGIN](?,?,?,?,?,?,?)}";
 			$params = array(
 							 array($correo,SQLSRV_PARAM_IN),
 							 array($contrasenia,SQLSRV_PARAM_IN),
 							 array($pcMensaje,SQLSRV_PARAM_OUT),
 							 array($pnIDUsuario,SQLSRV_PARAM_OUT),
 							 array($pcNombreUsuario,SQLSRV_PARAM_OUT),
-							 array($pbOcurreError,SQLSRV_PARAM_OUT)
+							 array($pbOcurreError,SQLSRV_PARAM_OUT),
+							 array($pnflag,SQLSRV_PARAM_OUT)
 							);
 			$result = $conexion->ejectuarSP($ts_sql,$params);
 			if($result){
@@ -208,8 +215,11 @@
 					session_start();
 					$_SESSION["id_usuario"] = $pnIDUsuario;
 					$_SESSION["nombre_usuario"] = $pcNombreUsuario;
+					$_SESSION["flag"] = $pnflag;
 					$login[]["mensaje"] = $pcMensaje;
 					$login[]["codigo_error"] = $pbOcurreError;	
+			}else{
+				die(print_r(sqlsrv_errors(),true));
 			}
 			
 			return json_encode($login);

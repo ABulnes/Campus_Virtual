@@ -10,16 +10,7 @@ var clase = $("#slc-clase"),
     vi = $("#chk-Vi"),
     sa = $("#chk-Sa");
 var cad = '';
-$(document).ready(function () {
-    $.ajax({
-        url: "ajax/api.php?accion='Login'",
-        success: function (respuesta) {
-            if (respuesta == 0) {
-                location.href = "index.html";
-            }
-        }
-    });
-});
+
 /**
  * Funcion que valida la hora automaticamente
  */

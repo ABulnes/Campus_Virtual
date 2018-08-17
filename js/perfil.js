@@ -1,35 +1,34 @@
 $.getScript("js/funciones.js");
 
 $(document).ready(function () {
-    $.ajax({
-        url: "ajax/api.php?accion='Login'",
-        success: function (respuesta) {
-            if (respuesta == 0) {
-                location.href = "index.html";
-            }
-        }
-    });
-    var flag = 0;
-    var parametro = "id_usuario=" + 8 +
-        "&flag=" + 0 +
-        "&cflag=" + 0;
+
     $.ajax({
         url: "ajax/api.php?accion='obtenerPerfil'",
-        data: parametro,
+        data: "cflag=" + 0,
         dataType: "json",
         success: function (respuesta) {
             console.log(respuesta);
             $("#btn-usuario").html(respuesta[0].nombre_usuario)
             $("#h-uname").html(respuesta[0].p_nombre + " " + respuesta[0].s_nombre + " " + respuesta[0].p_apellido + " " + respuesta[0].s_apellido);
             $("#h-name").html(respuesta[0].nombre_usuario);
-            if (flag == 0) {
+            if (respuesta[2].flag == 0) {
                 $("#h-tusuario").html("Alumno");
             } else {
                 $("#h-tusuario").html("Docente");
             }
-            $("#div-biografia").html(respuesta[0].biografia);
+            if (respuesta[0].biografia != null) {
+                $("#div-biografia").html(respuesta[0].biografia);
+            } else {
+                $("#div-biografia").html("Sin biografia");
+            }
+
             $("#div-nac").html(parseFecha(respuesta[0].fecha_nacimiento.date));
-            $("#div-intereses").html(respuesta[0].intereses);
+            if (respuesta[0].intereses != null) {
+                $("#div-intereses").html(respuesta[0].intereses);
+            }else{
+                $("#div-intereses").html("Sin intereses");
+            }
+
             $("#div-correo").html(respuesta[0].correo);
             $("#div-telefono").html(respuesta[0].telefono);
             if (respuesta[1].cursos.length != 0) {
@@ -60,4 +59,17 @@ $(document).ready(function () {
     });
 
 
+});
+
+
+$("#btn-cerrar").click(function () {
+    $.ajax({
+        url: "ajax/api.php?accion='Log-out'",
+        success: function (respuesta) {
+            console.log(respuesta);
+            if (respuesta == 1) {
+                location.href = "index.html";
+            }
+        }
+    });
 });

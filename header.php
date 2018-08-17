@@ -1,4 +1,8 @@
-
+  <?php session_start(); 
+        if(!(isset($_SESSION["id_usuario"]) && isset($_SESSION["nombre_usuario"]))){
+           header('Location: index.html');
+        }
+  ?>
   <nav class="navbar navbar-expand-md header fixed-top">
     <a class="navbar-brand" href="home.php">Campus Virtual</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
@@ -40,15 +44,15 @@
         <div class="dropdown">
           <button class="btn bg-transparent text-white mn-btn dropdown-toggle" type="button" id="btn-usuario" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Nombre Usuario
+            <?php echo  $_SESSION["nombre_usuario"]?>
           </button>
           <div class="dropdown-menu dropdown-menu-right  mn-drop" aria-labelledby="btn-usuario">
             <a class="dropdown-item text-white" href="perfil.php">Perfil</a>
             <a class="dropdown-item text-white" href="configuracion.php">Configuracion</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-white" href="#">Cerrar Sesion &nbsp;
+            <button class="dropdown-item text-white" type="button" id="btn-cerrar">Cerrar Sesion &nbsp;
               <i class="fas fa-sign-out-alt fa-lg"></i>
-            </a>
+            </button>
           </div>
         </div>
       </form>

@@ -2,16 +2,7 @@ var facultad = $("#slc-facultad");
 clase = $("#slc-clase");
 seccion = $("#slc-seccion");
 
-$(document).ready(function () {
-	$.ajax({
-		url: "ajax/api.php?accion='Login'",
-		success: function (respuesta) {
-			if (respuesta == 0) {
-				location.href = "index.html";
-			}
-		}
-	});
-});
+
 
 function validar() {
 	var listo = true;
@@ -52,4 +43,16 @@ $("#btn-matricular").click(function () {
 			"seccion" + seccion.val();
 		console.log(parametros);
 	}
+});
+
+$("#btn-cerrar").click(function () {
+    $.ajax({
+        url: "ajax/api.php?accion='Log-out'",
+        success: function (respuesta) {
+            console.log(respuesta);
+            if (respuesta == 1){
+                location.href="index.html";
+            }
+        }
+    });
 });

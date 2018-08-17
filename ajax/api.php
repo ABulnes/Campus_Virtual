@@ -7,11 +7,11 @@
     switch($_GET["accion"]){
         case "'obtenerPerfil'":
             session_start();
-            echo Usuario::getPerfil($conexion,$_SESSION["id_usuario"],$_GET["flag"],$_GET["cflag"]);
+            echo Usuario::getPerfil($conexion,$_SESSION["id_usuario"],$_SESSION["flag"],$_GET["cflag"]);
         break;
         case "'obtenerPublicacion'":
             session_start();
-            echo Publicacion::getPublicacion($conexion,$_GET["flag"],$_SESSION["id_usuario"]);
+            echo Publicacion::getPublicacion($conexion,$_SESSION["flag"],$_SESSION["id_usuario"]);
         break;
         
         case "'agregarUsuario'":
@@ -40,6 +40,7 @@
                 }
         break;
         case "'Log-out'":
+                session_start();
                 if(session_destroy()){
                     echo 1;
                 }else{

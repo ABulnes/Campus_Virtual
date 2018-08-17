@@ -1,15 +1,6 @@
 var mensaje = $("#txt-mensaje");
 
-$(document).ready(function () {
-	$.ajax({
-		url: "ajax/api.php?accion='Login'",
-		success: function (respuesta) {
-			if (respuesta == 0) {
-				location.href = "index.html";
-			}
-		}
-	});
-});
+
 
 function validar() {
 	var listo = true;
@@ -29,4 +20,16 @@ $("#btn-enviar").click(function () {
 		var parametros = "&mensaje=" + mensaje.val();
 		console.log(parametros);
 	}
+});
+
+$("#btn-cerrar").click(function () {
+    $.ajax({
+        url: "ajax/api.php?accion='Log-out'",
+        success: function (respuesta) {
+            console.log(respuesta);
+            if (respuesta == 1){
+                location.href="index.html";
+            }
+        }
+    });
 });

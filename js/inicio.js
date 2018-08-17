@@ -1,14 +1,7 @@
 $.getScript("js/funciones.js");
 $(document).ready(function () {
+
    
-    $.ajax({
-        url: "ajax/api.php?accion='Login'",
-        success:function(respuesta){
-           if(respuesta==0){
-               location.href = "index.html";
-           }
-        }
-    });
     var parametros = "id_usuario=" + 8 +
         "&flag=" + 0;
     $.ajax({
@@ -62,4 +55,16 @@ $(document).ready(function () {
         }
     });
 
+});
+
+$("#btn-cerrar").click(function () {
+    $.ajax({
+        url: "ajax/api.php?accion='Log-out'",
+        success: function (respuesta) {
+            console.log(respuesta);
+            if (respuesta == 1){
+                location.href="index.html";
+            }
+        }
+    });
 });
