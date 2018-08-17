@@ -17,7 +17,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Matricula</a>
+          <a class="nav-link" href="matricula.php">Matricula</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">

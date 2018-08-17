@@ -84,8 +84,12 @@
             $result = $conexion->ejecutarConsulta($sql);
             while($fila = $conexion->obtenerFila($result)){
                 $publicacion[] = $fila;
-            }
-            $sql = "SELECT id_publicacion,titulo,fecha_maxima,Flag FROM vw_ProximosEventos";
+			}
+			if($flag==0){
+				$sql = "SELECT id_publicacion,titulo,fecha_maxima,Flag FROM vw_ProximosEventos WHERE id_usuario=".$idUsuario;
+			}else{
+				$sql = "SELECT id_publicacion,titulo,fecha_maxima,Flag FROM vw_ProximosEventosDocente WHERE id_usuario=".$idUsuario;
+			}
             $result = $conexion->ejecutarConsulta($sql);
             while($fila = $conexion->obtenerfila($result)){
                 $eventos[] = $fila;
@@ -95,7 +99,22 @@
             $inicio[]["eventos"] = $eventos;
 			
             return json_encode($inicio);
-        }
+		}
+		//Funcion que retorna los eventos
+		public static function getEventos($conexion,$idUsuario,$flag){
+			$eventos = array();
+			if($flag==0){
+				$sql = "SELECT id_publicacion,titulo,fecha_maxima,Flag FROM vw_ProximosEventos WHERE id_usuario=".$idUsuario;
+			}else{
+				$sql = "SELECT id_publicacion,titulo,fecha_maxima,Flag FROM vw_ProximosEventosDocente WHERE id_usuario=".$idUsuario;
+			}
+			//echo $sql;
+            $result = $conexion->ejecutarConsulta($sql);
+            while($fila = $conexion->obtenerfila($result)){
+                $eventos[] = $fila;
+			}
+			return json_encode($eventos);	
+		}
 
 	};
 ?>

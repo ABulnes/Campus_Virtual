@@ -2,6 +2,7 @@
     include("../class/class-conexion.php");
     include("../class/class-usuario.php");
     include("../class/class-publicacion.php");
+    include("../class/class-curso.php");
 
     $conexion = new Conexion();
     switch($_GET["accion"]){
@@ -50,6 +51,15 @@
         case "'iniciarSesion'":
                echo Usuario::iniciarSesion($conexion,$_GET["correo"],$_GET["contraseña"]);                        
         break;
+        case "'obtenerEventos'":
+               session_start();
+               echo Publicacion::getEventos($conexion,$_SESSION["id_usuario"],$_SESSION["flag"]);  
+        break;
+        case "'obtenerCurso'":
+                session_start();
+                echo Curso::getCurso($conexion,$_SESSION["id_usuario"],$_SESSION["flag"]);
+        break;
+
     }
 
 
