@@ -99,6 +99,37 @@ switch ($_GET["accion"]) {
             $_GET["cupos"]
         );
         break;
+    case "'eliminarSeccion'":
+        session_start();
+        echo Seccion::eliminarSeccion($conexion, $_GET["id_seccion"], $_SESSION["id_tusuario"], $_GET["id_clase"], $_GET["id_aula"], $_GET["id_periodo"]);
+        break;
+    case "'getEditarSeccion'":
+        session_start();
+        echo Seccion::getSeccionID($conexion, $_GET["id_seccion"], $_GET["id_aula"]);
+        break;
+    case "'modificarSeccion'":
+        session_start();
+        echo Seccion::editarSeccion($conexion, $_SESSION["id_tusuario"], $_GET["id_seccion"], $_GET["clase"], $_GET["aula"], $_GET["horai"], $_GET["horaf"], $_GET["periodo"], $_GET["cupos"]);
+        break;
+    case "'crearCurso'":
+        echo Curso::crearCurso($conexion, $_GET["seccion"], $_GET["nombre_curso"], $_GET["descripcion"]);
+        break;
+    case "'eliminarCurso'":
+        echo Curso::eliminarCurso($conexion, $_GET["id_seccion"]);
+        break;
+    case "'obtenerEditarCurso'":
+        session_start();
+        echo Curso::getEditarCurso($conexion, $_GET["id_seccion"], $_SESSION["flag"]);
+        break;
+    case "'editarCurso'":
+        echo Curso::editarCurso($conexion, $_GET["seccion"], $_GET["nombre_curso"], $_GET["descripcion"]);
+        break;
+    case "'obtenerClases'":
+        echo json_encode(Seccion::getClase($conexion));
+    break;
+    case "'getSeccionClase'":
+        echo Seccion::getSeccionClase($conexion,$_GET["id_clase"]);
+    break;
 }
 
 

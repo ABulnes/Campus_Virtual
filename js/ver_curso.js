@@ -39,21 +39,45 @@ $(document).ready(function () {
         url: "ajax/api.php?accion='obtenerCurso'",
         dataType: "json",
         success: function (respuesta) {
-            if (respuesta.length != 0) {
-                for (var i = 0; i < respuesta.length; i++) {
-                    $("#div-cursos").append(
-                        '<div class="col-md-6 mt-2 mb-2 item-center">' +
-                        '<a class="d-block cur-link " href="curso_x.php?id_curso=' + respuesta[i].id_curso + '">' +
-                        '<div class="card p-2" style="width: 18rem;">' +
-                        '<img src="img/curso-icon.png" alt="Card image cap">' +
-                        '<div class="card-body">' +
-                        '<h5 class="card-title text-center">'+respuesta[i].nombre_curso+'</h5>' +
-                        '<p class="card-text text-center" >'+respuesta[i].nombre_institucion+'</p>' +
-                        '</div>' +
-                        '</div>' +
-                        '</a>' +
-                        '</div>'
-                    );
+            console.log(respuesta);
+            if (respuesta.length - 1 != 0) {
+                for (var i = 0; i < respuesta.length - 1; i++) {
+                    if (respuesta[respuesta.length - 1].flag == 1) {
+                        $("#div-cursos").append(
+                            '<div class="col-md-6 mt-2 mb-2 item-center">' +
+                            '<a class="d-block cur-link " href="curso_x.php?id_curso=' + respuesta[i].id_curso + '">' +
+                            '<div class="card p-2" style="width: 18rem;">' +
+                            '<div class="item-center">' +
+                            '<img src="img/curso-icon.png" alt="Card image cap">' +
+                            '</div>' +
+                            '<div class="card-body">' +
+                            '<h5 class="card-title text-center">' + respuesta[i].nombre_curso + '</h5>' +
+                            '<p class="card-text text-center" >' + respuesta[i].nombre_institucion + '</p>' +
+                            '</div>' +
+                            '</a>' +
+                            '<div class="card-text">' +
+                            '<button class="btn btn-outline-primary btn-sm position-relative float-right ml-2" onclick="eliminarCurso(' + respuesta[i].id_seccion + ')"><i class="fas fa-times"></i></button>' +
+                            '<button class="btn btn-outline-primary btn-sm float-right" onclick="editarCurso(' + respuesta[i].id_seccion + ')"><i class="fas fa-pencil-alt"></i></button>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    } else {
+                        $("#div-cursos").append(
+                            '<div class="col-md-6 mt-2 mb-2 item-center">' +
+                            '<a class="d-block cur-link " href="curso_x.php?id_curso=' + respuesta[i].id_curso + '">' +
+                            '<div class="card p-2" style="width: 18rem;">' +
+                            '<div class="item-center">' +
+                            '<img src="img/curso-icon.png" alt="Card image cap">' +
+                            '</div>' +
+                            '<div class="card-body">' +
+                            '<h5 class="card-title text-center">' + respuesta[i].nombre_curso + '</h5>' +
+                            '<p class="card-text text-center" >' + respuesta[i].nombre_institucion + '</p>' +
+                            '</div>' +
+                            '</a>' +
+                            '</div>'
+                        );
+                    }
+
                 }
             } else {
                 $("#div-cursos").html("<h5 class='text-center'>No tiene cursos disponibles en este periodo</h5>")
@@ -77,3 +101,25 @@ $("#btn-cerrar").click(function () {
     });
 });
 
+function eliminarCurso(id_seccion) {
+    if (confirm("¿Esta seguro de eliminar este curso?")) {
+        $.ajax({
+            url: "ajax/api.php?accion='eliminarCurso'",
+            data: "id_seccion=" + id_seccion,
+            dataType: "json",
+            success: function (respuesta) {
+                alert(respuesta[0].mensaje);
+                if (respuesta[1].codigo_error == 0) {
+                    location.reload();
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+}
+
+function editarCurso(id_seccion){
+    location.href="form-curso.php?seccion="+id_seccion;
+}

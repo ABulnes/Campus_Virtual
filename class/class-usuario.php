@@ -202,7 +202,7 @@ class Usuario
                         WHERE cur.id_seccion IN (SELECT m.id_seccion FROM Matricula m INNER JOIN Alumno a  ON a.id_alumno = m.id_alumno
 												 INNER JOIN Seccion s ON s.id_seccion = m.id_seccion
 												 INNER JOIN Periodo p ON p.id_periodo = s.id_periodo								
-                        						WHERE a.id_usuario=" . $idUsuario . "AND GETDATE() BETWEEN p.fecha_inicio AND p.fecha_fin)";
+                        						WHERE a.id_usuario=" . $idUsuario . "AND GETDATE() BETWEEN p.fecha_inicio AND p.fecha_fin AND cur.estado='A')";
 		} else {
 			if ($flag == 1) {
 				$sql = "SELECT cur.nombre_curso FROM Curso cur 
@@ -211,7 +211,7 @@ class Usuario
                                                     INNER JOIN Docente d ON d.id_docente= s.id_docente
 													INNER JOIN Periodo p ON p.id_periodo = s.id_periodo
                                                     WHERE d.id_usuario = " . $idUsuario . " AND GETDATE() BETWEEN p.fecha_inicio AND p.fecha_fin
-                                                    )";
+                                                    AND cur.estado = 'A')";
 			}
 		}
             //echo $sql;

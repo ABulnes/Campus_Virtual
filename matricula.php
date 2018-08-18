@@ -29,35 +29,16 @@
     <div class="row">
         <div class="col-7 contenedor d-none" id="div-MatriculaAlumno">
             <div class="row">
-                <div class="col-md-4">
-                    <h4>Facultad</h4>
-                    <select name="Facultad" class="form-control" id="slc-facultad" size="10" multiple>
-                        <option value="0">Facultad</option>
-                        <option value="1">Facultad 1</option>
-                        <option value="2">Facultad 2</option>
-                        <option value="3">Facultad 3</option>
-                        <option value="4">Facultad 4</option>
-                        <option value="5">Facultad 5</option>
-                        <option value="6">Facultad 6</option>
-                    </select>
-                    <div class="invalid-feedback">Debe Seleccionar una facultad</div>
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <h4>Clase</h4>
-                    <select name="Clase" class="form-control" id="slc-claseMatricular" size="10" multiple>
-                        <option value="0">Clase</option>
-                        <option value="1">Clase 1</option>
-                        <option value="2">Clase 2</option>
-                        <option value="3">Clase 3</option>
-                        <option value="4">Clase 4</option>
-                        <option value="5">Clase 5</option>
-                        <option value="6">Clase 6</option>
+                    <select name="Clase" class="form-control" id="slc-claseMatricular" size="10">
+                
                     </select>
                     <div class="invalid-feedback">Debe Seleccionar una clase</div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <h4>Seccion</h4>
-                    <select name="Seccion" class="form-control" id="slc-seccion" size="10" multiple>
+                    <select name="Seccion" class="form-control" id="slc-seccion" size="10">
                         <option value="0">Seccion</option>
                         <option value="1">Seccion 1</option>
                         <option value="2">Seccion 2</option>
@@ -170,6 +151,12 @@
             <div class="row justify-content-end">
                 <button class="btn btn-outline-primary  mr-4" id="btn-crear">Crear seccion</button>
             </div>
+            <div class="row justify-content-center d-none " id="div-editar">
+                <button class="btn btn-outline-primary  mr-4" id="btn-editar">Editar seccion</button>
+            </div>
+            <p class="d-none" id="id_seccion"></p>
+           
+
         </div>
         <div class="col-md-5 d-none " id="div-clasesAlumno">
             <h3 class="titulo-clasesmatriculadas">Clases Matriculadas Actualmente</h3>

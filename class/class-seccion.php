@@ -150,7 +150,7 @@ class Seccion
 	public static function getSeccion($conexion, $idDocente)
 	{
 		$seccion = array();
-		$sql = "    SELECT s.id_seccion,c.nombre_clase,s.hora_inicio,s.hora_fin FROM Seccion s
+		$sql = "    SELECT s.*,c.nombre_clase FROM Seccion s
 					INNER JOIN Clase c ON c.id_clase = s.id_clase
 					INNER JOIN Docente d ON d.id_docente = s.id_docente WHERE d.id_docente =" . $idDocente;
 		$result = $conexion->ejecutarConsulta($sql);
@@ -198,10 +198,11 @@ class Seccion
 			};
 			$mensaje[]["mensaje"] = $pcMensaje;
 			$mensaje[]["codigo_error"] = $pbOcurreError;
-			$sql = "SELECT s.id_seccion,c.nombre_clase,s.hora_inicio,s.hora_fin FROM Seccion s
+			sqlsrv_free_stmt($result);
+			$sql = "SELECT s.*,c.nombre_clase FROM Seccion s
 					INNER JOIN Clase c ON c.id_clase = s.id_clase
 					INNER JOIN Docente d ON d.id_docente = s.id_docente WHERE d.id_docente =" . $id_docente .
-					"AND s.id_seccion=" . $pnIdSeccion;
+				"AND s.id_seccion=" . $pnIdSeccion;
 			$result2 = $conexion->ejecutarConsulta($sql);
 			$mensaje[]["seccion"] = $conexion->obtenerFila($result2);
 		} else {
@@ -209,6 +210,90 @@ class Seccion
 		}
 
 		return json_encode($mensaje);
+	}
+
+	public static function eliminarSeccion($conexion, $id_seccion, $id_docente, $id_clase, $id_aula, $id_periodo)
+	{
+		$mensaje = array();
+		$pcMensaje = str_repeat("\0", 2000);
+		$pbOcurreError = 1;
+		$ts_sql = "{CALL [dbo].[SP_GESTION_SECCION](?,?,?,?,?,?,?,?,?,?,?)}";
+		$params = array(
+			array($id_seccion, SQLSRV_PARAM_IN),
+			array($id_docente, SQLSRV_PARAM_IN),
+			array($id_clase, SQLSRV_PARAM_IN),
+			array($id_aula, SQLSRV_PARAM_IN),
+			array($id_periodo, SQLSRV_PARAM_IN),
+			array('0:00', SQLSRV_PARAM_IN),
+			array('1:00', SQLSRV_PARAM_IN),
+			array(0, SQLSRV_PARAM_IN),
+			array("ELIMINAR", SQLSRV_PARAM_IN),
+			array($pcMensaje, SQLSRV_PARAM_OUT),
+			array($pbOcurreError, SQLSRV_PARAM_OUT),
+
+		);
+		$result = $conexion->ejectuarSP($ts_sql, $params);
+		if ($result) {
+			while ($conexion->obtenerParametros($result)) {
+			};
+			$mensaje[]["mensaje"] = $pcMensaje;
+			$mensaje[]["codigo_error"] = $pbOcurreError;
+			sqlsrv_free_stmt($result);
+		} else {
+			die(print_r(sqlsrv_errors(), true));
+		}
+
+		return json_encode($mensaje);
+	}
+
+	public static function getSeccionID($conexion, $id_seccion, $id_aula)
+	{
+		$seccion = array();
+		$sql = "SELECT * FROM Seccion WHERE id_seccion=" . $id_seccion;
+		$result = $conexion->ejecutarConsulta($sql);
+		$seccion[] = $conexion->obtenerFila($result);
+		$sql = "SELECT id_edificio FROM Aula WHERE id_aula =" . $id_aula;
+		$result = $conexion->ejecutarConsulta($sql);
+		$seccion[]["edificio"] = $conexion->obtenerFila($result);
+		return json_encode($seccion);
+	}
+
+	public static function editarSeccion($conexion, $id_docente, $id_seccion, $id_clase, $id_aula, $horai, $horaf, $periodo, $cupos)
+	{
+		$mensaje = array();
+		$pcMensaje = str_repeat("\0", 2000);
+		$pbOcurreError = 1;
+		$ts_sql = "{CALL [dbo].[SP_GESTION_SECCION](?,?,?,?,?,?,?,?,?,?,?)}";
+		$params = array(
+			array($id_seccion, SQLSRV_PARAM_IN),
+			array($id_docente, SQLSRV_PARAM_IN),
+			array($id_clase, SQLSRV_PARAM_IN),
+			array($id_aula, SQLSRV_PARAM_IN),
+			array($periodo, SQLSRV_PARAM_IN),
+			array($horai, SQLSRV_PARAM_IN),
+			array($horaf, SQLSRV_PARAM_IN),
+			array($cupos, SQLSRV_PARAM_IN),
+			array("MODIFICAR", SQLSRV_PARAM_IN),
+			array($pcMensaje, SQLSRV_PARAM_OUT),
+			array($pbOcurreError, SQLSRV_PARAM_OUT),
+
+		);
+		$result = $conexion->ejectuarSP($ts_sql, $params);
+		if ($result) {
+			while ($conexion->obtenerParametros($result)) {
+			};
+			$mensaje[]["mensaje"] = $pcMensaje;
+			$mensaje[]["codigo_error"] = $pbOcurreError;
+			sqlsrv_free_stmt($result);
+		} else {
+			die(print_r(sqlsrv_errors(), true));
+		}
+
+		return json_encode($mensaje);
+	}
+
+	public static function getSeccionClase($conexion,$id_clase){
+		
 	}
 
 }

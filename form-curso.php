@@ -14,10 +14,17 @@
 <body>
   
     <?php
-        include("header.php");
-      ?>
+    include("header.php");
+    ?>
   <main style="margin-bottom: 3rem;" role="main" class="mt-4">
     <div class="contenedor container " style="width: 60%">
+      <?php
+      if (isset($_GET["seccion"])) { ?>
+       <p class='d-none' id='id_seccion'> <?php echo $_GET["seccion"]; ?> </p>
+      <?php
+
+    }
+    ?>
       <div class="row" style="width: 100%">
         <div class="col-12">
           <h4>Crear curso</h4>
@@ -31,7 +38,7 @@
             <div class="col-4 mt-2 mb-2 form-group">
               <select class="form-control custom-select" id="slc-secciones">
                 <option value="Seleccione seccion">Seleccione seccion</option>
-                <option value="1">Bases de Datos -0700</option>
+               
               </select>
               <div class="invalid-feedback">Debe seleccionar una seccion</div>
             </div>
@@ -60,8 +67,11 @@
           </div>
         </div>
       </div>
-      <div class="row justify-content-end">
+      <div class="row justify-content-end" id="div-crear">
         <button class="btn btn-outline-primary  mr-4" id="btn-crear">Crear curso</button>
+      </div>
+      <div class="row justify-content-center d-none" id="div-editar">
+        <button class="btn btn-outline-primary  mr-4" id="btn-editar">Editar curso</button>
       </div>
     </div>
   </main>
