@@ -86,11 +86,12 @@
 			$this->curso = $curso;
 		}
         //Funcion que ingresa el usuario
-		public static function agregarUsuario($pnombre,$snombre,$papellido,$sapellido,$num_id,$correo,$telefono,$direccion,$genero,$fecha_nac,$tusuario,$nusaurio,$contrasenia,$conexion){
+		public static function agregarUsuario($pnombre,$snombre,$papellido,$sapellido,$num_id,$correo,$telefono,$direccion,$genero,$fecha_nac,$tusuario,$nusaurio,$contrasenia,
+		$cargo,$facultad,$conexion){
 			$pcMensaje = str_repeat("\0",2000);
 			$pbOcurreError = 1;
 			$mensaje = array();
-			$ts_sql = "{CALL [dbo].[SP_GESTION_USUARIO](?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+			$ts_sql = "{CALL [dbo].[SP_GESTION_USUARIO](?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 			$params = array(
 					array($pnombre,SQLSRV_PARAM_IN),
 					array($snombre,SQLSRV_PARAM_IN),
@@ -105,6 +106,8 @@
 					array($tusuario,SQLSRV_PARAM_IN),
 					array($nusaurio,SQLSRV_PARAM_IN),
 					array($contrasenia,SQLSRV_PARAM_IN),
+					array($cargo,SQLSRV_PARAM_IN),
+					array($facultad,SQLSRV_PARAM_IN),
 					array("AGREGAR",SQLSRV_PARAM_IN),
 					array($pcMensaje,SQLSRV_PARAM_OUT),
 					array($pbOcurreError,SQLSRV_PARAM_OUT)
@@ -194,12 +197,13 @@
 		//Funcion que verifica el inicio de sesion del usuario
 		public static function iniciarSesion($conexion,$correo,$contrasenia){
 			$pcMensaje = str_repeat("\0",2000);
+			$pnIDTusuario = 0;
 			$login = array();
 			$pnIDUsuario = 0;
 			$pcNombreUsuario = str_repeat("\0",200);
 			$pbOcurreError = 1;
 			$pnflag = -1;
-			$ts_sql = "{CALL [dbo].[SP_LOGIN](?,?,?,?,?,?,?)}";
+			$ts_sql = "{CALL [dbo].[SP_LOGIN](?,?,?,?,?,?,?,?)}";
 			$params = array(
 							 array($correo,SQLSRV_PARAM_IN),
 							 array($contrasenia,SQLSRV_PARAM_IN),
@@ -207,7 +211,8 @@
 							 array($pnIDUsuario,SQLSRV_PARAM_OUT),
 							 array($pcNombreUsuario,SQLSRV_PARAM_OUT),
 							 array($pbOcurreError,SQLSRV_PARAM_OUT),
-							 array($pnflag,SQLSRV_PARAM_OUT)
+							 array($pnflag,SQLSRV_PARAM_OUT),
+							 array($pnIDTusuario,SQLSRV_PARAM_OUT)
 							);
 			$result = $conexion->ejectuarSP($ts_sql,$params);
 			if($result){
@@ -216,6 +221,7 @@
 					$_SESSION["id_usuario"] = $pnIDUsuario;
 					$_SESSION["nombre_usuario"] = $pcNombreUsuario;
 					$_SESSION["flag"] = $pnflag;
+					$_SESSION["id_tusuario"] = $pnIDTusuario;
 					$login[]["mensaje"] = $pcMensaje;
 					$login[]["codigo_error"] = $pbOcurreError;	
 			}else{
@@ -224,6 +230,33 @@
 			
 			return json_encode($login);
 		
+		}
+
+		public static function getInfoDocente($conexion){
+			$info = array();
+			$info[]["cargo"] = self::getCargo($conexion);
+			$info[]["facultad"] = self::getFacultad($conexion);
+			return json_encode($info);
+		}
+
+		public static function getCargo($conexion){
+			$cargo = array();
+			$sql = "SELECT id_cargo, descripcion FROM Cargo";
+			$result = $conexion->ejecutarConsulta($sql);
+			while($fila = $conexion->obtenerFila($result)){
+				$cargo[] = $fila;
+			}
+			return $cargo;
+		}
+
+		public static function getFacultad($conexion){
+			$facultad = array();
+			$sql = "SELECT id_facultad, nombre_facultad FROM Facultad";
+			$result = $conexion->ejecutarConsulta($sql);
+			while($fila = $conexion->obtenerFila($result)){
+				$facultad[] = $fila;
+			}
+			return $facultad;
 		}
 
 	}

@@ -18,109 +18,209 @@
    
     <?php
       include("header.php");
+      echo "<p class='d-none' id='flag'>".$_SESSION["flag"]."</p>"
     ?>
         
 
-  <main style="margin-bottom: 3rem;" role="main" class="mt-4">
+ <main style="margin-bottom: 3rem;" role="main" class="mt-4">
 
-    <div class="container">
-      <h3 class="titulo-matricula">Matricula</h3>
-      <div class="row">
-        <div class="col-md-7 contenedor" id="div-Matricula">
-          <div class="row">
-            <div class="col-md-4">
-                <h4>Facultad</h4>
-              <select name="Facultad" class="form-control" id="slc-facultad" size="10" multiple>
-                  <option value="0">Facultad</option>
-                  <option value="1">Facultad 1</option>
-                  <option value="2">Facultad 2</option>
-                  <option value="3">Facultad 3</option>
-                  <option value="4">Facultad 4</option>
-                  <option value="5">Facultad 5</option>
-                  <option value="6">Facultad 6</option>
-              </select>
-              <div class="invalid-feedback">Debe Seleccionar una facultad</div>
+<div class="container">
+    <h3 class="titulo-matricula">Matricula</h3>
+    <div class="row">
+        <div class="col-7 contenedor d-none" id="div-MatriculaAlumno">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Facultad</h4>
+                    <select name="Facultad" class="form-control" id="slc-facultad" size="10" multiple>
+                        <option value="0">Facultad</option>
+                        <option value="1">Facultad 1</option>
+                        <option value="2">Facultad 2</option>
+                        <option value="3">Facultad 3</option>
+                        <option value="4">Facultad 4</option>
+                        <option value="5">Facultad 5</option>
+                        <option value="6">Facultad 6</option>
+                    </select>
+                    <div class="invalid-feedback">Debe Seleccionar una facultad</div>
+                </div>
+                <div class="col-md-4">
+                    <h4>Clase</h4>
+                    <select name="Clase" class="form-control" id="slc-claseMatricular" size="10" multiple>
+                        <option value="0">Clase</option>
+                        <option value="1">Clase 1</option>
+                        <option value="2">Clase 2</option>
+                        <option value="3">Clase 3</option>
+                        <option value="4">Clase 4</option>
+                        <option value="5">Clase 5</option>
+                        <option value="6">Clase 6</option>
+                    </select>
+                    <div class="invalid-feedback">Debe Seleccionar una clase</div>
+                </div>
+                <div class="col-md-4">
+                    <h4>Seccion</h4>
+                    <select name="Seccion" class="form-control" id="slc-seccion" size="10" multiple>
+                        <option value="0">Seccion</option>
+                        <option value="1">Seccion 1</option>
+                        <option value="2">Seccion 2</option>
+                        <option value="3">Seccion 3</option>
+                        <option value="4">Seccion 4</option>
+                        <option value="5">Seccion 5</option>
+                        <option value="6">Seccion 6</option>
+                    </select>
+                    <div class="invalid-feedback">Debe Seleccionar una seccion</div>
+                </div>
             </div>
-            <div class="col-md-4">
-                <h4>Clase</h4>
-                <select name="Clase" class="form-control" id="slc-clase" size="10" multiple>
-                    <option value="0">Clase</option>
-                    <option value="1">Clase 1</option>
-                    <option value="2">Clase 2</option>
-                    <option value="3">Clase 3</option>
-                    <option value="4">Clase 4</option>
-                    <option value="5">Clase 5</option>
-                    <option value="6">Clase 6</option>
-                </select>
-                <div class="invalid-feedback">Debe Seleccionar una clase</div>
+            <div class="row"> .</div>
+            <div class="row justify-content-center">
+                <button class="btn btn-outline-primary " id="btn-matricular">Matricular</button>
             </div>
-            <div class="col-md-4">
-              <h4>Seccion</h4>
-                <select name="Seccion" class="form-control" id="slc-seccion" size="10" multiple>
-                    <option value="0">Seccion</option>
-                    <option value="1">Seccion 1</option>
-                    <option value="2">Seccion 2</option>
-                    <option value="3">Seccion 3</option>
-                    <option value="4">Seccion 4</option>
-                    <option value="5">Seccion 5</option>
-                    <option value="6">Seccion 6</option>
-                </select>
-                <div class="invalid-feedback">Debe Seleccionar una seccion</div>
-            </div>
-          </div>
-          <div class="row">  .</div>
-          <div class="row justify-content-center">
-              <button class="btn btn-outline-primary " id="btn-matricular">Matricular</button>
-          </div>
 
         </div>
-        
-          
-        
-        <div class="col-md-5">
-          <h3 class="titulo-clasesmatriculadas">Clases Matriculadas Actualmente</h3>
-          <div class="container contenedor" id="div-clasesmatriculadas">
+        <div class="col-7 contenedor d-none " style="width: 60%" id="div-MatriculaDocente">
             <div class="row">
-              <div class="col-md-12">
-                  <p class="mb-0 font-weight-bold">Nombre Clase</p>
-                  <p class="mb-0 small">Hora inicio-Hora Fin</p>
-              </div>
+                <div class="col-12">
+                    <h4>Crear seccion</h4>
+                    <hr class="hr-encabezado">
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="offset-1 col-3 mt-2 mb-2">
+                            Clase
+                        </div>
+                        <div class="col-4 mt-2 mb-2 form-group">
+                            <select class="custom-select" id="slc-clase">
+                                <option value="Seleccione clase">Seleccione clase</option>
+                            </select>
+                            <div class="invalid-feedback">Debe seleccionar una clase</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="offset-1 col-3 mt-2 mb-2">
+                            Aula
+                        </div>
+                        <div class="col-4 mt-2 mb-2 form-group">
+                            <select class="custom-select" id="slc-aula">
+                                <option value="Seleccione aula">Seleccione aula</option>
+                                
+                            </select>
+                            <div class="invalid-feedback">Debe seleccionar un aula</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="offset-1 col-3 mt-2 mb-2">
+                            Edificio
+                        </div>
+                        <div class="col-4 mt-2 mb-2 form-group">
+                            <select class="custom-select" id="slc-edificio">
+                                <option value="Seleccione edificio">Seleccione edificio</option>
+                                <option>A1</option>
+                                <option>B1</option>
+                                <option>B2</option>
+                            </select>
+                            <div class="invalid-feedback">Debe seleccionar un edificio</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="offset-1 col-3  mt-2 mb-2">
+                            Periodo
+                        </div>
+                        <div class="col-4  mt-2 mb-2">
+                            <input type="text" class="form-control" id="txt-periodo" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="offset-1 col-3  mt-2 mb-2">
+                            Hora inicio
+                        </div>
+                        <div class="col-4  mt-2 mb-2">
+                            <input type="time" class="form-control" id="txt-horai">
+                            <div class="invalid-feedback">Debe seleccionar una hora</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="offset-1 col-3  mt-2 mb-2">
+                            Hora fin
+                        </div>
+                        <div class="col-4  mt-2 mb-2">
+                            <input type="time" class="form-control" id="txt-horaf" disabled>
+                            <div class="invalid-feedback">Debe seleccionar una hora</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="offset-1 col-3  mt-2 mb-2">
+                            Cupos Maximos
+                        </div>
+                        <div class="col-4  mt-2 mb-2">
+                            <input type="text" class="form-control" id="txt-cupos-max">
+                            <div class="invalid-feedback">Debe ingresar una cantidad maxima de cupos</div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-12">
-                <p class="mb-0 font-weight-bold">Nombre Clase</p>
-                <p class="mb-0 small">Hora inicio-Hora Fin</p>
-              </div>
+            <div class="row justify-content-end">
+                <button class="btn btn-outline-primary  mr-4" id="btn-crear">Crear seccion</button>
             </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-12">
-                <p class="mb-0 font-weight-bold">Nombre Clase</p>
-                <p class="mb-0 small">Hora inicio-Hora Fin</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-12">
-                <p class="mb-0 font-weight-bold">Nombre Clase</p>
-                <p class="mb-0 small">Hora inicio-Hora Fin</p>
-              </div>
-            </div>
-            <hr>
-  
-
-            
-          </div>
         </div>
+        <div class="col-md-5 d-none " id="div-clasesAlumno">
+            <h3 class="titulo-clasesmatriculadas">Clases Matriculadas Actualmente</h3>
+            <div class="container contenedor" id="div-clases">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="mb-0 font-weight-bold">Nombre Clase</p>
+                        <p class="mb-0 small">Hora inicio-Hora Fin</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="mb-0 font-weight-bold">Nombre Clase</p>
+                        <p class="mb-0 small">Hora inicio-Hora Fin</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="mb-0 font-weight-bold">Nombre Clase</p>
+                        <p class="mb-0 small">Hora inicio-Hora Fin</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="mb-0 font-weight-bold">Nombre Clase</p>
+                        <p class="mb-0 small">Hora inicio-Hora Fin</p>
+                    </div>
+                </div>
+                <hr>
 
 
-        
-      </div>
+
+            </div>
+        </div>
+        <div class="col-md-5 d-none" id="div-seccionesDocente">
+            <h3 class="titulo-clasesmatriculadas">Secciones Impartidas</h3>
+            <div class="container contenedor" id="div-secciones">
+                
+                
+            </div>
+        </div>
     </div>
-  </main>
+</div>
+</main>
   
-  <footer class=" navbar navbar-expand footer text-white fixed-bottom">
+  <footer class="mt-4 navbar navbar-expand footer text-white ">
     <p>&copy; BD 2018</p>
   </footer>
 

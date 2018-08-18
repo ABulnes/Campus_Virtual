@@ -67,3 +67,15 @@ function iconoEvento(flag) {
 
     return icono;
 }
+/**
+ * Funcion que parse la hora a un formato mas ligero
+ * @param {*} hora 
+ */
+function parseHora(hora){
+    var shora = hora.split("-");
+    var thora = shora[2].split(" ");
+    var xhora = thora[1];
+    var yhora = xhora.split(".");
+    var fhora = yhora[0];
+    return fhora;
+}

@@ -207,3 +207,9 @@ $("#btn-cerrar").click(function () {
         }
     });
 });
+
+$("#btn-cambiar").click(function(){
+    if($("#div-contrasena").hasClass("d-none")){
+        $("#div-contrasena").removeClass("d-none");
+    }
+});

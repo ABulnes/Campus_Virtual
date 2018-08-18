@@ -3,12 +3,7 @@ var clase = $("#slc-clase"),
     edificio = $("#slc-edificio"),
     hinicio = $("#txt-horai"),
     hfin = $("#txt-horaf"),
-    lu = $("#chk-Lu"),
-    ma = $("#chk-Ma"),
-    mi = $("#chk-Mi"),
-    ju = $("#chk-Ju"),
-    vi = $("#chk-Vi"),
-    sa = $("#chk-Sa");
+   
 var cad = '';
 
 /**
@@ -71,42 +66,7 @@ function validar() {
 
     }
 
-    var contador = 0;
-    $("input[name='chk-uv']").each(function () {
-        if ($(this).is(':checked')) {
-            contador++;
-            cad = cad + $(this).attr('id').split("-")[1];
-
-        }
-    });
-    console.log(contador);
-    if (contador != 5) {
-        lu.removeClass("is-valid");
-        ma.removeClass("is-valid");
-        mi.removeClass("is-valid");
-        ju.removeClass("is-valid");
-        vi.removeClass("is-valid");
-        sa.removeClass("is-valid");
-        lu.addClass("is-invalid");
-        ma.addClass("is-invalid");
-        mi.addClass("is-invalid");
-        ju.addClass("is-invalid");
-        vi.addClass("is-invalid");
-        sa.addClass("is-invalid");
-    } else {
-        lu.removeClass("is-invalid");
-        ma.removeClass("is-invalid");
-        mi.removeClass("is-invalid");
-        ju.removeClass("is-invalid");
-        vi.removeClass("is-invalid");
-        sa.removeClass("is-invalid");
-        lu.addClass("is-valid");
-        ma.addClass("is-valid");
-        mi.addClass("is-valid");
-        ju.addClass("is-valid");
-        vi.addClass("is-valid");
-        sa.addClass("is-valid");
-    }
+    
 
     return listo;
 }
@@ -118,8 +78,7 @@ $("#btn-crear").click(function () {
             "&aula=" + aula.val() +
             "&edificio=" + edificio.val() +
             "&horai=" + hinicio.val() +
-            "&horaf=" + hfin.val() +
-            "&dias=" + cad;
+            "&horaf=" + hfin.val();
         console.log(parametros);
 
 

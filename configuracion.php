@@ -148,9 +148,35 @@
                 Contraseña
               </div>
               <div class="col-4 mt-2 mb-2">
-                <a role="button" class="text-primary">Cambiar Contraseña</a>
+                <button type="button" class="text-primary btn btn-link" id="btn-cambiar">Cambiar Contraseña</button>
               </div>
             </div>
+          </div>
+          <div class="col-12 d-none" id="div-contrasena">
+             <div class="row">
+                <div class="col-4 mt-2 mb-2">
+                   Contraseña vieja
+                </div>
+                <div class="col-4 mt-2 mb-2">
+                   <input type="password" class="form-control" id="txt-vcontrasenia">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4 mt-2 mb-2">
+                   Contraseña nueva
+                </div>
+                <div class="col-4 mt-2 mb-2">
+                   <input type="password" class="form-control" id="txt-ncontrasenia">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4 mt-2 mb-2">
+                   Confirmar contraseña
+                </div>
+                <div class="col-4 mt-2 mb-2">
+                   <input type="password" class="form-control" id="txt-confirmar">
+                </div>
+             </div> 
           </div>
         </div>
         <div class="row justify-content-end">

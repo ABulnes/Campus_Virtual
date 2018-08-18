@@ -15,9 +15,39 @@ var pnombre = $("#txt-pnombre"),
     docente = $("#chk-docente"),
     nusuario = $("#txt-nusuario"),
     contraseña = $("#txt-contrasenia"),
-    confirmar = $("#txt-confirmar");
+    confirmar = $("#txt-confirmar"),
+    cargo = $("#slc-cargo"),
+    facultad = $("#slc-facultad");
 var genero, tusuario;
 
+$(document).ready(function () {
+    for (var x = 1950; x < 2018; x++) {
+        año.append(
+            '<option value="' + x + '">' + x + '</option>'
+        );
+    }
+    $.ajax({
+        url: "ajax/api.php?accion='obtenerCargo_Facultad'",
+        dataType: "json",
+        success: function (respuesta) {
+           
+            for (var i = 0; i < respuesta[0].cargo.length; i++) {
+                cargo.append(
+                    '<option value="' + respuesta[0].cargo[i].id_cargo + '">' + respuesta[0].cargo[i].descripcion + '</option>'
+                );
+            }
+
+            for (var j = 0; j < respuesta[1].facultad.length; j++) {
+                facultad.append(
+                    '<option value="' + respuesta[1].facultad[j].id_facultad + '">' + respuesta[1].facultad[j].nombre_facultad + '</option>'
+                );
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+});
 /**
  * Funcion de validacion de Correo
  */
@@ -167,6 +197,21 @@ function validar() {
             docente.removeClass("is-invalid");
         } else {
             if (docente.is(':checked')) {
+                if (cargo.val() == 'Seleccione cargo' && facultad.val() == 'Seleccione facultad') {
+                    cargo.removeClass("is-valid");
+                    cargo.addClass("is-invalid");
+                    facultad.removeClass("is-valid");
+                    facultad.addClass("is-invalid");
+                    listo = false;
+                    return;
+                } else {
+                    cargo.addClass("is-valid");
+
+                    cargo.removeClass("is-invalid");
+
+                    facultad.addClass("is-valid");
+                    facultad.removeClass("is-invalid");
+                }
                 tusuario = docente.val();
                 docente.addClass("is-valid");
                 docente.removeClass("is-invalid");
@@ -255,7 +300,9 @@ $("#btn-finalizar").click(function () {
             "&fecha_nac=" + fecha_nac +
             "&tusuario=" + tusuario +
             "&nusuario=" + nusuario.val() +
-            "&contrasenia=" + contraseña.val();
+            "&contrasenia=" + contraseña.val() +
+            "&cargo=" + cargo.val() +
+            "&facultad=" + facultad.val();
         console.log(parametros);
         $.ajax({
             url: "ajax/api.php?accion='agregarUsuario'",
@@ -264,8 +311,8 @@ $("#btn-finalizar").click(function () {
             success: function (respuesta) {
                 console.log(respuesta);
                 alert(respuesta[0].mensaje);
-                if (respuesta[1].codigo_error == 0){
-                    window.setTimeout(null,5000);
+                if (respuesta[1].codigo_error == 0) {
+                    window.setTimeout(null, 5000);
                     location.href = "login.html";
                 }
             },
@@ -273,5 +320,19 @@ $("#btn-finalizar").click(function () {
                 console.log(error);
             }
         });
+    }
+});
+
+docente.change(function () {
+    if (docente.is(":checked")) {
+        $("#div-idocente").removeClass("d-none");
+    }
+});
+
+alumno.change(function () {
+    if (alumno.is(":checked")) {
+        if (!$("#div-idocente").hasClass("d-none")) {
+            $("#div-idocente").addClass("d-none");
+        }
     }
 });

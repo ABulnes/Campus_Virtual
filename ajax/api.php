@@ -3,7 +3,7 @@
     include("../class/class-usuario.php");
     include("../class/class-publicacion.php");
     include("../class/class-curso.php");
-
+    include("../class/class-seccion.php");
     $conexion = new Conexion();
     switch($_GET["accion"]){
         case "'obtenerPerfil'":
@@ -29,16 +29,10 @@
                                          $_GET["tusuario"],
                                          $_GET["nusuario"],
                                          $_GET["contrasenia"],
+                                         $_GET["cargo"],
+                                         $_GET["facultad"],
                                          $conexion   
                                         );
-        break;
-        case "'Login'":
-                session_start();
-                if((isset($_SESSION["id_usuario"]) && isset($_SESSION["nombre_usuario"]))){
-                    echo 1;
-                }else{
-                    echo 0;
-                }
         break;
         case "'Log-out'":
                 session_start();
@@ -58,6 +52,16 @@
         case "'obtenerCurso'":
                 session_start();
                 echo Curso::getCurso($conexion,$_SESSION["id_usuario"],$_SESSION["flag"]);
+        break;
+        case "'obtenerInfoSeccion'":
+                echo Seccion::getInfoSeccion($conexion);
+        break;
+        case "'obtenerSeccion'":
+                session_start();
+                echo Seccion::getSeccion($conexion,$_SESSION["id_tusuario"]);
+        break;
+        case "'obtenerCargo_Facultad'":
+                echo Usuario::getInfoDocente($conexion);
         break;
 
     }
