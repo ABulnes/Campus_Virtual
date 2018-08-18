@@ -84,3 +84,7 @@ body {
     right: 0;
     left: auto;
 }
+
+#slc-seccion{
+  overflow: auto;
+}

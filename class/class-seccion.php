@@ -292,8 +292,20 @@ class Seccion
 		return json_encode($mensaje);
 	}
 
-	public static function getSeccionClase($conexion,$id_clase){
-		
+	public static function getSeccionClase($conexion, $id_clase)
+	{
+		$seccion = array();
+		$sql = "SELECT s.*,CONCAT(p.p_nombre,' ',p.p_apellido) nombre FROM Seccion s 
+				INNER JOIN Docente d ON s.id_docente = d.id_docente
+				INNER JOIN Usuario u ON u.id_usuario = d.id_usuario
+				INNER JOIN Persona p ON p.id_persona = u.id_persona
+				WHERE s.id_clase =".$id_clase;
+		$result = $conexion->ejecutarConsulta($sql);
+		while($fila = $conexion->obtenerFila($result)){
+			$seccion[] = $fila;
+		}
+
+		return json_encode($seccion);
 	}
 
 }

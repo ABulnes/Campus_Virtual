@@ -27,7 +27,7 @@
 <div class="container">
     <h3 class="titulo-matricula">Matricula</h3>
     <div class="row">
-        <div class="col-7 contenedor d-none" id="div-MatriculaAlumno">
+        <div class="col-8 contenedor d-none" id="div-MatriculaAlumno">
             <div class="row">
                 <div class="col-md-6">
                     <h4>Clase</h4>
@@ -39,13 +39,7 @@
                 <div class="col-md-6">
                     <h4>Seccion</h4>
                     <select name="Seccion" class="form-control" id="slc-seccion" size="10">
-                        <option value="0">Seccion</option>
-                        <option value="1">Seccion 1</option>
-                        <option value="2">Seccion 2</option>
-                        <option value="3">Seccion 3</option>
-                        <option value="4">Seccion 4</option>
-                        <option value="5">Seccion 5</option>
-                        <option value="6">Seccion 6</option>
+                       
                     </select>
                     <div class="invalid-feedback">Debe Seleccionar una seccion</div>
                 </div>
@@ -158,8 +152,8 @@
            
 
         </div>
-        <div class="col-md-5 d-none " id="div-clasesAlumno">
-            <h3 class="titulo-clasesmatriculadas">Clases Matriculadas Actualmente</h3>
+        <div class="col-md-4 d-none " id="div-clasesAlumno">
+            <h4 class="titulo-clasesmatriculadas">Clases Matriculadas</h4>
             <div class="container contenedor" id="div-clases">
                 <div class="row">
                     <div class="col-md-12">

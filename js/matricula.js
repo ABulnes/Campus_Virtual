@@ -443,18 +443,20 @@ $("#btn-editar").click(function () {
 });
 
 $("#slc-claseMatricular").change(function () {
+  $("#slc-seccion").html("");
   var parametros = "id_clase=" + $("#slc-claseMatricular").val();
   $.ajax({
     url: "ajax/api.php?accion='getSeccionClase'",
     data: parametros,
     dataType: "json",
     success: function (respuesta) {
+      console.log(respuesta);
       if (respuesta.length != 0) {
         for (var i = 0; i < respuesta.length; i++) {
           $("#slc-seccion").append(
             '<option value="' + respuesta[i].id_seccion + '">' + parseHora(respuesta[i].hora_inicio.date) + ' / ' +
             parseHora(respuesta[i].hora_fin.date) + '    ' +
-            respuesta[i].nombre_docente +
+            respuesta[i].nombre +
             ' Cupos disponibles: ' + respuesta[i].max_cupos + '</option>'
           );
         }
