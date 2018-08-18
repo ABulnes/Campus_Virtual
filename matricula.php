@@ -17,8 +17,8 @@
 <body>
    
     <?php
-      include("header.php");
-      echo "<p class='d-none' id='flag'>".$_SESSION["flag"]."</p>"
+    include("header.php");
+    echo "<p class='d-none' id='flag'>" . $_SESSION["flag"] . "</p>"
     ?>
         
 
@@ -116,9 +116,7 @@
                         <div class="col-4 mt-2 mb-2 form-group">
                             <select class="custom-select" id="slc-edificio">
                                 <option value="Seleccione edificio">Seleccione edificio</option>
-                                <option>A1</option>
-                                <option>B1</option>
-                                <option>B2</option>
+                               
                             </select>
                             <div class="invalid-feedback">Debe seleccionar un edificio</div>
                         </div>

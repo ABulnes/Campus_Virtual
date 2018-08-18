@@ -43,7 +43,7 @@ $(document).ready(function () {
 			url: "ajax/api.php?accion='obtenerInfoSeccion'",
 			dataType: "json",
 			success: function (respuesta) {
-				console.log(respuesta);
+				
 				for (var i = 0; i < respuesta[0].clases.length; i++) {
 					$("#slc-clase").append(
 						'<option value=' + respuesta[0].clases[i].id_clase + '>' + respuesta[0].clases[i].nombre_clase + '</option>'
@@ -70,19 +70,19 @@ $(document).ready(function () {
 			url: "ajax/api.php?accion='obtenerSeccion'",
 			dataType: "json",
 			success: function (respuesta) {
-				console.log(respuesta);
+				
 				if (respuesta.length != 0) {
 					for (var i = 0; i < respuesta.length; i++) {
 						$("#div-secciones").append(
-							'<div class="row">'+
-							'<div class="col-md-12">'+
-								'<button class="float-right btn btn-outline-primary btn-sm ml-2" onclick="editarSeccion('+respuesta[i].id_seccion+')"><i class="fas fa-pencil-alt"></i></button>'+
-								'<button class="float-right btn btn-outline-primary btn-sm" onclick="eliminarSeccion('+respuesta[i].id_seccion+')" ><i class="fas fa-times"></i></button>'+
-								'<p class="mb-0 font-weight-bold">'+respuesta[i].nombre_clase+'</p>'+
-								'<p class="mb-0 small">Hora Inicio: '+parseHora(respuesta[i].hora_inicio.date)+' /  Hora Fin: '+parseHora(respuesta[i].hora_fin.date)+'</p>'+
-							'</div>'+
-						'</div>'+
-						'<hr>'
+							'<div class="row">' +
+							'<div class="col-md-12">' +
+							'<button class="float-right btn btn-outline-primary btn-sm ml-2" onclick="editarSeccion(' + respuesta[i].id_seccion + ')"><i class="fas fa-pencil-alt"></i></button>' +
+							'<button class="float-right btn btn-outline-primary btn-sm" onclick="eliminarSeccion(' + respuesta[i].id_seccion + ')" ><i class="fas fa-times"></i></button>' +
+							'<p class="mb-0 font-weight-bold">' + respuesta[i].nombre_clase + '</p>' +
+							'<p class="mb-0 small">Hora Inicio: ' + parseHora(respuesta[i].hora_inicio.date) + ' /  Hora Fin: ' + parseHora(respuesta[i].hora_fin.date) + '</p>' +
+							'</div>' +
+							'</div>' +
+							'<hr>'
 						);
 					}
 				} else {
@@ -236,6 +236,33 @@ $("#btn-crear").click(function () {
 			"&periodo=" + periodo.attr("value") +
 			"&cupos=" + cupos.val();
 		console.log(parametros);
+		$.ajax({
+			url: "ajax/api.php?accion='crearSeccion'",
+			data: parametros,
+			dataType: "json",
+			success: function (respuesta) {
+				console.log(respuesta);
+				alert(respuesta[0].mensaje);
+				location.reload();
+				if (respuesta[1].codigo_error == 0) {
+					$("#div-secciones").append(
+						'<div class="row">' +
+						'<div class="col-md-12">' +
+						'<button class="float-right btn btn-outline-primary btn-sm ml-2" onclick="editarSeccion(' + respuesta[2].seccion.id_seccion + ')"><i class="fas fa-pencil-alt"></i></button>' +
+						'<button class="float-right btn btn-outline-primary btn-sm" onclick="eliminarSeccion(' + respuesta[2].seccion.id_seccion + ')" ><i class="fas fa-times"></i></button>' +
+						'<p class="mb-0 font-weight-bold">' + respuesta[2].seccion.nombre_clase + '</p>' +
+						'<p class="mb-0 small">Hora Inicio: ' + parseHora(respuesta[2].seccion.hora_inicio.date) + ' /  Hora Fin: ' + parseHora(respuesta[2].seccion.hora_fin.date) + '</p>' +
+						'</div>' +
+						'</div>' +
+						'<hr>'
+					);
+				}
+
+			},
+			error: function (error) {
+				console.log(error);
+			}
+		});
 
 
 	}

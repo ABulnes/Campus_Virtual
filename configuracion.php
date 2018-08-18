@@ -14,8 +14,8 @@
 <body>
  
     <?php
-       include("header.php");
-      ?>
+    include("header.php");
+    ?>
   <main style="margin-bottom: 3rem;" role="main" class="mt-4">
     <div class="container">
       <!--Menu de configuracion-->
@@ -105,6 +105,16 @@
           <div class="col-12">
             <div class="row">
               <div class=" col-4  mt-2 mb-2">
+                Direccion
+              </div>
+              <div class="col-4  mt-2 mb-2">
+                <textarea class="form-control" id="txt-direccion"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class=" col-4  mt-2 mb-2">
                 Intereses
               </div>
               <div class="col-4  mt-2 mb-2">
@@ -175,6 +185,11 @@
                 </div>
                 <div class="col-4 mt-2 mb-2">
                    <input type="password" class="form-control" id="txt-confirmar">
+                </div>
+             </div> 
+             <div class="row justify-content-center">
+                <div class="col-4 mt-2 mb-2">
+                <button class="btn btn-outline-primary  mr-4" id="btn-guardar-contrasena">Guardar Contraseña</button>
                 </div>
              </div> 
           </div>

@@ -8,16 +8,14 @@ var info_cuenta = $("#link-cuenta"),
     amigos = $("#div-amigos");
 
 $(document).ready(function () {
-    
-  
-        
+
+
+
     $.ajax({
         url: "ajax/api.php?accion='obtenerPerfil'",
         data: "cflag=" + 1,
         dataType: "json",
         success: function (respuesta) {
-            console.log(respuesta);
-            $("#btn-usuario").html(respuesta[0].nombre_usuario);
             $("#txt-pnombre").val(respuesta[0].p_nombre);
             $("#txt-snombre").val(respuesta[0].s_nombre);
             $("#txt-papellido").val(respuesta[0].p_apellido);
@@ -27,6 +25,7 @@ $(document).ready(function () {
             $("#txt-interes").val(respuesta[0].intereses);
             $("#txt-correo").val(respuesta[0].correo);
             $("#txt-telefono").val(respuesta[0].telefono);
+            $("#txt-direccion").val(respuesta[0].direccion);
             if (respuesta[1].config.notifiacion_curso == 'A') {
                 $("#slc-acceso option[value='A']").attr("selected", true);
             } else {
@@ -201,15 +200,84 @@ $("#btn-cerrar").click(function () {
         url: "ajax/api.php?accion='Log-out'",
         success: function (respuesta) {
             console.log(respuesta);
-            if (respuesta == 1){
-                location.href="index.html";
+            if (respuesta == 1) {
+                location.href = "index.html";
             }
         }
     });
 });
 
-$("#btn-cambiar").click(function(){
-    if($("#div-contrasena").hasClass("d-none")){
+$("#btn-cambiar").click(function () {
+    if ($("#div-contrasena").hasClass("d-none")) {
         $("#div-contrasena").removeClass("d-none");
+    } else {
+        $("#div-contrasena").addClass("d-none");
+    }
+});
+
+$("#btn-guardar").click(function () {
+    var parametros = "pnombre=" + $("#txt-pnombre").val() +
+        "&snombre=" + $("#txt-snombre").val() +
+        "&papellido=" + $("#txt-papellido").val() +
+        "&sapellido=" + $("#txt-sapellido").val() +
+        "&nusuario=" + $("#txt-nusuario").val() +
+        "&biografia=" + $("#txt-biografia").val() +
+        "&interes=" + $("#txt-interes").val() +
+        "&correo=" + $("#txt-correo").val() +
+        "&telefono=" + $("#txt-telefono").val() +
+        "&direccion=" + $("#txt-direccion").val();
+    $.ajax({
+        url: "ajax/api.php?accion='actualizarUsuario'",
+        data: parametros,
+        dataType: "json",
+        success: function (respuesta) {
+            console.log(respuesta);
+            alert(respuesta[0].mensaje);
+            if (respuesta[1].codigo_error == 0 ) {
+                location.reload();
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+
+});
+
+
+function validarContrasena() {
+    var listo = true;
+    if ($("#txt-ncontrasenia").val() != $("#txt-confirmar").val()) {
+        alert("La nueva contraseña no coincide");
+        listo = false;
+    }
+
+    if($("#txt-ncontrasenia").val()==''){
+        alert("Debe ingresar la nueva contraseña");
+        listo = false;
+    }
+    return listo;
+}
+
+$("#btn-guardar-contrasena").click(function(){
+    if(validarContrasena()){
+        var parametros = "contrasena="+$("#txt-ncontrasenia").val();
+        $.ajax({
+            url: "ajax/api.php?accion='actualizarContrasenia'",
+            data: parametros,
+            dataType: "json",
+            success:function(respuesta){
+                alert(respuesta[0].mensaje);
+                $("#txt-vcontrasenia").val("");
+                $("#txt-ncontrasenia").val("");
+                $("#txt-confirmar").val("");
+                if(respuesta[1].codigo_error == 0){
+                    $("#div-contrasena").addClass("d-none");
+                }
+            },
+            error:function(error){
+                console.log(error);
+            }
+        });
     }
 });
