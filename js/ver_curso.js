@@ -62,20 +62,23 @@ $(document).ready(function () {
                             '</div>'
                         );
                     } else {
-                        $("#div-cursos").append(
-                            '<div class="col-md-6 mt-2 mb-2 item-center">' +
-                            '<a class="d-block cur-link " href="curso_x.php?id_curso=' + respuesta[i].id_curso + '">' +
-                            '<div class="card p-2" style="width: 18rem;">' +
-                            '<div class="item-center">' +
-                            '<img src="img/curso-icon.png" alt="Card image cap">' +
-                            '</div>' +
-                            '<div class="card-body">' +
-                            '<h5 class="card-title text-center">' + respuesta[i].nombre_curso + '</h5>' +
-                            '<p class="card-text text-center" >' + respuesta[i].nombre_institucion + '</p>' +
-                            '</div>' +
-                            '</a>' +
-                            '</div>'
-                        );
+                        if (respuesta[respuesta.length - 1].flag == 0) {
+                            $("#div-cursos").append(
+                                '<div class="col-md-6 mt-2 mb-2 item-center">' +
+                                '<a class="d-block cur-link " href="curso_x.php?id_curso=' + respuesta[i].id_curso + '">' +
+                                '<div class="card p-2" style="width: 18rem;">' +
+                                '<div class="item-center">' +
+                                '<img src="img/curso-icon.png" alt="Card image cap">' +
+                                '</div>' +
+                                '<div class="card-body">' +
+                                '<h5 class="card-title text-center">' + respuesta[i].nombre_curso + '</h5>' +
+                                '<p class="card-text text-center" >' + respuesta[i].nombre_institucion + '</p>' +
+                                '</div>' +
+                                '</a>' +
+                                '</div>'
+                            );
+                        }
+
                     }
 
                 }
@@ -120,6 +123,6 @@ function eliminarCurso(id_seccion) {
     }
 }
 
-function editarCurso(id_seccion){
-    location.href="form-curso.php?seccion="+id_seccion;
+function editarCurso(id_seccion) {
+    location.href = "form-curso.php?seccion=" + id_seccion;
 }
