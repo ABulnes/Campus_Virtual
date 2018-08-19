@@ -114,6 +114,7 @@ $("#btn-editar").click(function () {
     $.ajax({
         url: "ajax/api.php?accion='editarCurso'",
         data: parametros,
+        contentType: "application/x-www-form-urlencoded;charset=UTF-8",
         dataType: "json",
         success: function (respuesta) {
             alert(respuesta[0].mensaje);

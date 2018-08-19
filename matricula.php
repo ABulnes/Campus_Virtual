@@ -155,37 +155,7 @@
         <div class="col-md-4 d-none " id="div-clasesAlumno">
             <h4 class="titulo-clasesmatriculadas">Clases Matriculadas</h4>
             <div class="container contenedor" id="div-clases">
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="mb-0 font-weight-bold">Nombre Clase</p>
-                        <p class="mb-0 small">Hora inicio-Hora Fin</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="mb-0 font-weight-bold">Nombre Clase</p>
-                        <p class="mb-0 small">Hora inicio-Hora Fin</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="mb-0 font-weight-bold">Nombre Clase</p>
-                        <p class="mb-0 small">Hora inicio-Hora Fin</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="mb-0 font-weight-bold">Nombre Clase</p>
-                        <p class="mb-0 small">Hora inicio-Hora Fin</p>
-                    </div>
-                </div>
-                <hr>
-
-
-
+     
             </div>
         </div>
         <div class="col-md-5 d-none" id="div-seccionesDocente">

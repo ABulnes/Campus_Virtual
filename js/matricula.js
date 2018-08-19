@@ -1,6 +1,6 @@
 $.getScript("js/funciones.js");
 var facultad = $("#slc-facultad");
-clase = $("#slc-clase");
+claseMatricular = $("#slc-claseMatricular");
 (seccion = $("#slc-seccion")), (flag = $("#flag").html());
 
 var clase = $("#slc-clase"),
@@ -32,6 +32,7 @@ function usoMatricula() {
     }
   }
 }
+//Funcion de carga del DOM
 $(document).ready(function () {
   usoMatricula();
 
@@ -130,13 +131,52 @@ $(document).ready(function () {
         url: "ajax/api.php?accion='obtenerClases'",
         dataType: "json",
         success: function (respuesta) {
-          console.log(respuesta);
+
           for (var i = 0; i < respuesta.length; i++) {
             $("#slc-claseMatricular").append(
-              '<option value="' + respuesta[i].id_clase + '">' + respuesta[i].nombre_clase + '</option>'
+              '<option value="' +
+              respuesta[i].id_clase +
+              '">' +
+              respuesta[i].nombre_clase +
+              "</option>"
             );
           }
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
 
+      $.ajax({
+        url: "ajax/api.php?accion='obtenerSeccionAlumno'",
+        dataType: "json",
+        success: function (respuesta) {
+          if (respuesta.length != 0) {
+            for (var i = 0; i < respuesta.length; i++) {
+              $("#div-clases").append(
+                '<div class="row">' +
+                '<div class="col-md-12">' +
+                '<button class="float-right btn btn-outline-primary btn-sm" onclick="eliminarClase(' +
+                respuesta[i].id_seccion +
+                ')" ><i class="fas fa-times"></i></button>' +
+                '<p class="mb-0 font-weight-bold">' +
+                respuesta[i].nombre_clase +
+                "</p>" +
+                '<p class="mb-0 small">Hora Inicio: ' +
+                parseHora(respuesta[i].hora_inicio.date) +
+                " /  Hora Fin: " +
+                parseHora(respuesta[i].hora_fin.date) +
+                "</p>" +
+                "</div>" +
+                "</div>" +
+                "<hr>"
+              );
+            }
+          } else {
+            $("#div-clases").html(
+              "<h5 class='text-center'>No tiene clases matriculadas</h5>"
+            );
+          }
         },
         error: function (error) {
           console.log(error);
@@ -146,28 +186,21 @@ $(document).ready(function () {
   }
 });
 
-//Validacion del formulario
+//Validacion del formulario de matricula
 function validar() {
+
+
   var listo = true;
-  if (facultad.val() == "") {
-    facultad.removeClass("is-valid");
-    facultad.addClass("is-invalid");
+  if (claseMatricular.val() == null) {
+    claseMatricular.removeClass("is-valid");
+    claseMatricular.addClass("is-invalid");
     listo = false;
   } else {
-    facultad.removeClass("is-invalid");
-    facultad.addClass("is-valid");
+    claseMatricular.removeClass("is-invalid");
+    claseMatricular.addClass("is-valid");
   }
 
-  if (clase.val() == "") {
-    clase.removeClass("is-valid");
-    clase.addClass("is-invalid");
-    listo = false;
-  } else {
-    clase.removeClass("is-invalid");
-    clase.addClass("is-valid");
-  }
-
-  if (seccion.val() == "") {
+  if (seccion.val() == null) {
     seccion.removeClass("is-valid");
     seccion.addClass("is-invalid");
     listo = false;
@@ -179,19 +212,44 @@ function validar() {
   return listo;
 }
 
+//Funcionalidad del boton matricular
 $("#btn-matricular").click(function () {
+
   if (validar()) {
-    var parametros =
-      "facultad=" +
-      facultad.val() +
-      "clase=" +
-      clase.val() +
-      "seccion" +
-      seccion.val();
-    console.log(parametros);
+    $.ajax({
+      url: "ajax/api.php?accion='matricular'",
+      data: "id_seccion=" + $("#slc-seccion").val(),
+      dataType: "json",
+      success: function (respuesta) {
+        console.log($("#div-clases").html());
+        if ($("#div-clases").html() == '<h5 class="text-center">No tiene clases matriculadas</h5>') {
+          $("#div-clases").html("");
+        }
+        console.log(respuesta);
+        alert(respuesta[0].mensaje);
+        if (respuesta[1].codigo_error == 0) {
+          $("#div-clases").append(
+            '<div class="row">' +
+            '<div class="col-md-12">' +
+            '<button class="float-right btn btn-outline-primary btn-sm" onclick="eliminarClase(' +
+            respuesta[2].seccion.id_seccion +
+            ')" ><i class="fas fa-times"></i></button>' +
+            '<p class="mb-0 font-weight-bold">' + respuesta[2].seccion.nombre_clase + '</p>' +
+            '<p class="mb-0 small"> Hora Inicio: ' + parseHora(respuesta[2].seccion.hora_inicio.date) + '/ Hora Fin: ' + parseHora(respuesta[2].seccion.hora_fin.date) + '</p>' +
+            '</div>' +
+            '</div>' +
+            '<hr>'
+          )
+        }
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
   }
 });
 
+//Funcionalidad para finalizar sesion
 $("#btn-cerrar").click(function () {
   $.ajax({
     url: "ajax/api.php?accion='Log-out'",
@@ -269,7 +327,7 @@ function validarSeccion() {
 
   return listo;
 }
-
+//Funcionalidad del boton crear seccion
 $("#btn-crear").click(function () {
   if (validarSeccion()) {
     var parametros =
@@ -293,7 +351,7 @@ $("#btn-crear").click(function () {
       data: parametros,
       dataType: "json",
       success: function (respuesta) {
-        console.log(respuesta);
+        $("#div-secciones").html("");
         alert(respuesta[0].mensaje);
         if (respuesta[1].codigo_error == 0) {
           $("#div-secciones").append(
@@ -406,6 +464,7 @@ function editarSeccion(id_seccion, id_clase, id_aula, id_periodo) {
   });
 }
 
+//Funcionalidad para editar
 $("#btn-editar").click(function () {
   var parametros =
     "id_seccion=" +
@@ -442,6 +501,7 @@ $("#btn-editar").click(function () {
   });
 });
 
+//Obtiene las secciones de las clases
 $("#slc-claseMatricular").change(function () {
   $("#slc-seccion").html("");
   var parametros = "id_clase=" + $("#slc-claseMatricular").val();
@@ -450,22 +510,59 @@ $("#slc-claseMatricular").change(function () {
     data: parametros,
     dataType: "json",
     success: function (respuesta) {
-      console.log(respuesta);
+
       if (respuesta.length != 0) {
         for (var i = 0; i < respuesta.length; i++) {
-          $("#slc-seccion").append(
-            '<option value="' + respuesta[i].id_seccion + '">' + parseHora(respuesta[i].hora_inicio.date) + ' / ' +
-            parseHora(respuesta[i].hora_fin.date) + '    ' +
-            respuesta[i].nombre +
-            ' Cupos disponibles: ' + respuesta[i].max_cupos + '</option>'
-          );
+          if (respuesta[i].cupos_disponibles != 0) {
+            $("#slc-seccion").append(
+              '<option value="' +
+              respuesta[i].id_seccion +
+              '">' +
+              parseHora(respuesta[i].hora_inicio.date) +
+              "  -  " +
+              respuesta[i].nombre +
+              " - Cupos disponibles: " +
+              respuesta[i].cupos_disponibles +
+              "</option>"
+            );
+          } else {
+            $("#slc-seccion").append(
+              '<option>' +
+              parseHora(respuesta[i].hora_inicio.date) +
+              "  - Seccion llena " +
+              "</option>"
+            );
+          }
+
         }
       } else {
-        $("#slc-seccion").html("<option>No hay secciones disponibles para esta clase</option>");
+        $("#slc-seccion").html(
+          "<option>No hay secciones disponibles para esta clase</option>"
+        );
       }
     },
     error: function (error) {
-
+      console.log(error);
     }
   });
 });
+
+function eliminarClase(id_seccion) {
+  if (confirm("¿Esta seguro de eliminar la clase matriculada?")) {
+    $.ajax({
+      url: "ajax/api.php?accion='eliminarClase'",
+      data: "id_seccion=" + id_seccion,
+      dataType: "json",
+      success: function (respuesta) {
+        alert(respuesta[0].mensaje);
+        if (respuesta[1].codigo_error == 0) {
+          window.setTimeout(null, "3000");
+          location.reload();
+        }
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  }
+}

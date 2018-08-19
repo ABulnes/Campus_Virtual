@@ -110,8 +110,11 @@ class Seccion
 		$clases = array();
 		$sql = "SELECT id_clase, nombre_clase FROM Clase";
 		$result = $conexion->ejecutarConsulta($sql);
+
 		while ($fila = $conexion->obtenerFila($result)) {
 			$clases[] = $fila;
+
+
 		}
 		return $clases;
 	}
@@ -153,6 +156,21 @@ class Seccion
 		$sql = "    SELECT s.*,c.nombre_clase FROM Seccion s
 					INNER JOIN Clase c ON c.id_clase = s.id_clase
 					INNER JOIN Docente d ON d.id_docente = s.id_docente WHERE d.id_docente =" . $idDocente;
+		$result = $conexion->ejecutarConsulta($sql);
+		while ($fila = $conexion->obtenerFila($result)) {
+			$seccion[] = $fila;
+		}
+
+		return json_encode($seccion);
+	}
+
+	public static function getSeccionA($conexion, $idAlumno)
+	{
+		$seccion = array();
+		$sql = " SELECT s.id_seccion,c.nombre_clase,s.hora_fin,s.hora_inicio FROM Seccion s
+				 INNER JOIN Clase c ON c.id_clase = s.id_clase
+				 INNER JOIN Matricula m ON m.id_seccion = s.id_seccion
+				 AND m.id_alumno =" . $idAlumno;
 		$result = $conexion->ejecutarConsulta($sql);
 		while ($fila = $conexion->obtenerFila($result)) {
 			$seccion[] = $fila;
@@ -295,17 +313,78 @@ class Seccion
 	public static function getSeccionClase($conexion, $id_clase)
 	{
 		$seccion = array();
-		$sql = "SELECT s.*,CONCAT(p.p_nombre,' ',p.p_apellido) nombre FROM Seccion s 
+		$sql = "SELECT s.*,CONCAT(p.p_nombre,' ',p.p_apellido) nombre, 
+			    [dbo].[CUPOS_DISPONIBLES](s.id_seccion) cupos_disponibles FROM Seccion s 
 				INNER JOIN Docente d ON s.id_docente = d.id_docente
 				INNER JOIN Usuario u ON u.id_usuario = d.id_usuario
 				INNER JOIN Persona p ON p.id_persona = u.id_persona
-				WHERE s.id_clase =".$id_clase;
+				WHERE s.id_clase =" . $id_clase;
 		$result = $conexion->ejecutarConsulta($sql);
-		while($fila = $conexion->obtenerFila($result)){
+
+		while ($fila = $conexion->obtenerFila($result)) {
 			$seccion[] = $fila;
 		}
 
 		return json_encode($seccion);
+	}
+
+	public static function matricular($conexion, $id_alumno, $id_seccion)
+	{
+		$mensaje = array();
+		$pcMensaje = str_repeat("\0", 1000);
+		$pbOcurreError = 1;
+		$ts_sql = "{CALL [dbo].[SP_GESTION_MATRICULA](?,?,?,?,?)}";
+		$params = array(
+			array($id_seccion, SQLSRV_PARAM_IN),
+			array($id_alumno, SQLSRV_PARAM_IN),
+			array("AGREGAR", SQLSRV_PARAM_IN),
+			array($pcMensaje, SQLSRV_PARAM_OUT),
+			array($pbOcurreError, SQLSRV_PARAM_OUT)
+		);
+		$result = $conexion->ejectuarSP($ts_sql, $params);
+		if ($result) {
+			while ($conexion->obtenerParametros($result)) {
+			};
+			$mensaje[]["mensaje"] = $pcMensaje;
+			$mensaje[]["codigo_error"] = $pbOcurreError;
+			sqlsrv_free_stmt($result);
+			$sql = "SELECT s.id_seccion,c.nombre_clase,s.hora_fin,s.hora_inicio FROM Seccion s
+					INNER JOIN Clase c ON c.id_clase = s.id_clase
+					INNER JOIN Matricula m ON m.id_seccion = s.id_seccion
+					AND s.id_seccion=" . $id_seccion . " AND m.id_alumno =" . $id_alumno;
+			$result2 = $conexion->ejecutarConsulta($sql);
+			$mensaje[]["seccion"] = $conexion->obtenerFila($result2);
+		} else {
+			die(print_r(sqlsrv_errors(), true));
+		}
+
+		return json_encode($mensaje);
+	}
+
+	public static function eliminarClase($conexion, $id_alumno, $id_seccion)
+	{
+		$mensaje = array();
+		$pcMensaje = str_repeat("\0", 1000);
+		$pbOcurreError = 1;
+		$ts_sql = "{CALL [dbo].[SP_GESTION_MATRICULA](?,?,?,?,?)}";
+		$params = array(
+			array($id_seccion, SQLSRV_PARAM_IN),
+			array($id_alumno, SQLSRV_PARAM_IN),
+			array("ELIMINAR", SQLSRV_PARAM_IN),
+			array($pcMensaje, SQLSRV_PARAM_OUT),
+			array($pbOcurreError, SQLSRV_PARAM_OUT)
+		);
+		$result = $conexion->ejectuarSP($ts_sql, $params);
+		if ($result) {
+			while ($conexion->obtenerParametros($result)) {
+			};
+			$mensaje[]["mensaje"] = $pcMensaje;
+			$mensaje[]["codigo_error"] = $pbOcurreError;
+		} else {
+			die(print_r(sqlsrv_errors(), true));
+		}
+
+		return json_encode($mensaje);
 	}
 
 }

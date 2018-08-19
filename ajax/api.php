@@ -61,6 +61,10 @@ switch ($_GET["accion"]) {
         session_start();
         echo Seccion::getSeccion($conexion, $_SESSION["id_tusuario"]);
         break;
+    case "'obtenerSeccionAlumno'":
+         session_start();
+         echo Seccion::getSeccionA($conexion,$_SESSION["id_tusuario"]);   
+        break;
     case "'obtenerCargo_Facultad'":
         echo Usuario::getInfoDocente($conexion);
         break;
@@ -126,9 +130,17 @@ switch ($_GET["accion"]) {
         break;
     case "'obtenerClases'":
         echo json_encode(Seccion::getClase($conexion));
-    break;
+        break;
     case "'getSeccionClase'":
-        echo Seccion::getSeccionClase($conexion,$_GET["id_clase"]);
+        echo Seccion::getSeccionClase($conexion, $_GET["id_clase"]);
+        break;
+    case "'matricular'":
+        session_start();
+        echo Seccion::matricular($conexion, $_SESSION["id_tusuario"], $_GET["id_seccion"]);
+        break;
+    case "'eliminarClase'":
+        session_start();
+        echo Seccion::eliminarClase($conexion,$_SESSION["id_tusuario"],$_GET["id_seccion"]);
     break;
 }
 

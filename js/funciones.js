@@ -76,6 +76,7 @@ function parseHora(hora){
     var thora = shora[2].split(" ");
     var xhora = thora[1];
     var yhora = xhora.split(".");
-    var fhora = yhora[0];
+    var zhora = yhora[0].split(":");
+    var fhora = zhora[0]+zhora[1];
     return fhora;
 }
